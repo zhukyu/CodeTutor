@@ -1,0 +1,6 @@
+/reactapp/node_modules
+/reactapp/build
+/laravelapi/public/hot
+/laravelapi/public/storage
+/laravelapi/storage/*.key
+/laravelapi/vendor

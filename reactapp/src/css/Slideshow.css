@@ -1,0 +1,15 @@
+.slideshow {
+    border-radius: 15px;
+    top: 200px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    margin: 20px auto;
+    width: 80%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
+}

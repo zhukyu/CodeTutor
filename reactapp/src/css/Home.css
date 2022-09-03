@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap');
+
 .banner {
     position: relative;
     height: 100vh;
@@ -6,19 +7,25 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    
+}
+
+.wrap-home {
+    width: 1300px;
+    padding: 0 15px;
+    margin: 0 auto;
+    transition: 0.3s;
 }
 
 .course-section {
-    height: 30rem;
     justify-content: center;
+    margin: 20px 0;
 }
 
 .wrap-header {
     align-items: center;
-    justify-content: center;
     display: flex;
     margin: 30px 0;
+    justify-content: space-between;
 }
 
 .header {
@@ -26,4 +33,99 @@
     font-size: 2rem;
     font-weight: bold;
     color: #333;
+    transition: 0.3s;
+}
+
+.all-courses {
+    font-weight: bold;
+    color: #57D9AC;
+    text-decoration: none;
+}
+
+.fa-greater-than {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.all-courses:hover{
+    text-decoration: underline;
+    transition: 0.2s ease-in;
+}
+
+.all-courses:hover .fa-greater-than {
+    transform: translateX(5px);
+    transition: 0.2s ease-in;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.item {
+    padding: 15px;
+    width: 25%;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+@media (max-width: 1400px) {
+    .wrap-home {
+        width: 90%;
+    }
+}
+
+@media (max-width: 1220px) {
+    .item {
+        width: calc(100% / 3);
+    }
+}
+
+@media (max-width: 1010px) {
+    .item {
+        width: 50%;
+    }
+}
+
+@media (max-width: 700px) {
+    .wrap-home {
+        width: 85%;
+    }
+    .item {
+        width: 100%;
+    }
+}
+
+@media (max-width: 550px) {
+    .wrap-header {
+        justify-content: flex-start;
+    }
+    .all-courses span {
+        display: none;
+    }
+
+    .all-courses {
+        padding: 4px;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+        border: 2px solid #57D9AC;
+        border-radius: 100px;
+    }
+
+    .all-courses i {
+        margin: 0;
+    }
+
+    .all-courses:hover {
+        background-color: #57D9AC;
+    }
+
+    .all-courses:hover .fa-greater-than {
+        transform: none;
+        color: white;
+    }
 }

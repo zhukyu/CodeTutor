@@ -15,16 +15,16 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-h1 {
+.login-form h1 {
     font-weight: bold;
     margin: 0;
 }
 
-h2 {
+.login-form h2 {
     text-align: center;
 }
 
-p {
+.login-form p {
     font-size: 14px;
     font-weight: 100;
     line-height: 20px;
@@ -32,7 +32,7 @@ p {
     margin: 20px 0 30px;
 }
 
-span {
+.login-form span {
     font-size: 12px;
 }
 

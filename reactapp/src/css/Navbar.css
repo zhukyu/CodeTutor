@@ -8,7 +8,7 @@
     width: 90%;
     background: #fff;
     margin: 0 auto;
-    height: 80px;
+    height: 70px;
     display: flex;
     gap: 30px;
     justify-content: center;
@@ -17,11 +17,11 @@
     white-space: nowrap;
     box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
     padding-left: 10px;
+    padding-right: 10px;
+    z-index: 9;
 }
 
 .NavbarItems.scrolled {
-    
-    position: fixed;
     top: 0;
     width: 100%;
     display: flex;
@@ -49,10 +49,11 @@
 
 .logo-icon {
     transition: all 0.5s;
-    width: 50px;
+    width: 45px;
 }
 
 .logo-title {
+    font-size: 1.3rem;
     transition: all 0.5s;
     padding-top: 8px;
     vertical-align: middle;
@@ -68,6 +69,7 @@
 }
 
 .nav-menu {
+    height: 70px;
     display: flex;
     flex-direction: row;
     grid-gap: 10px;
@@ -80,19 +82,14 @@
 .nav-links {
     color: black;
     text-decoration: none;
-    padding: 27px 1rem;
+    padding: 20px 1rem;
     border-bottom: #57D9AC 3px transparent;
 }
 
-.nav-links:not(.is-active):hover:before {
-    opacity: 1;
-    bottom: 0;
-}
-
 .nav-links:hover {
-    color: #57D9AC;
+    color: #bdbdbd;
     transition: all 0.1s;
-    border-bottom: 3px solid #57D9AC;
+    border-bottom: 3px solid #bdbdbd;
 }
 
 .nav-links.is-active {
@@ -113,7 +110,7 @@
 }
 
 .container-signIn {
-    margin: 20px;
+    padding: 15px;
 }
 
 @media (max-width: 1075px) {
@@ -157,7 +154,7 @@
     }
 
     .nav-links:hover {
-        border-bottom: 2px solid #57D9AC;
+        border-bottom: 2px solid #bdbdbd;
     }
 
     .nav-links.is-active {

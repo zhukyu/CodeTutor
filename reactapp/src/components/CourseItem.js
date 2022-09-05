@@ -14,17 +14,17 @@ function CourseItem(props) {
                     </span> 
                 </span>
                 <div className="course-title">
-                    <Link to="#" >Object Oriented-Programming in C++</Link>
+                    <Link to="#" >{props.title}</Link>
                 </div>
                 <div className="course-author">
-                    <Link to="#">Zhukyu</Link>
+                    <Link to="#">{props.author}</Link>
                 </div>
                 <p className="course-description">
-                    General Informatics is the basic subject of Informatics. This course focuses on providing basic and comprehensive knowledge of computer softwares and basic computer skills so that users can grasp the basic but highly applicable knowledge in daily computer use.
+                    {props.description}
                 </p>
                 <hr />
                 <h4 className="course-price">
-                    Free
+                    {props.price}
                 </h4>
             </div>
         </div>

@@ -2,16 +2,65 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import CourseItem from '../components/CourseItem';
 import Navbar from '../components/Navbar/Navbar';
-import Slideshow from '../components/Slideshow';
 import '../css/Home.css';
-import banner from '../img/home_banner.jpg'
+
+let items = [
+    {
+        rate: 30,
+        title: "Object Oriented-Programming in C++",
+        author: "Zhukyu",
+        description: "General Informatics is the basic subject of Informatics. This course focuses on providing basic and comprehensive knowledge of computer softwares and basic computer skills so that users can grasp the basic but highly applicable knowledge in daily computer use.",
+        price: "Free"
+    },
+    {
+        rate: 100,
+        title: "Object Oriented-Programming in C++",
+        author: "Zhukyu",
+        description: "General Informatics is the basic subject of Informatics. This course focuses on providing basic and comprehensive knowledge of computer softwares and basic computer skills so that users can grasp the basic but highly applicable knowledge in daily computer use.",
+        price: "Free"
+    },
+    {
+        rate: 30,
+        title: "Object Oriented-Programming in C++",
+        author: "Zhukyu",
+        description: "General Informatics is the basic subject of Informatics. This course focuses on providing basic and comprehensive knowledge of computer softwares and basic computer skills so that users can grasp the basic but highly applicable knowledge in daily computer use.",
+        price: "Free"
+    },
+    {
+        rate: 80,
+        title: "Object Oriented-Programming in C++",
+        author: "Zhukyu",
+        description: "General Informatics is the basic subject of Informatics. This course focuses on providing basic and comprehensive knowledge of computer softwares and basic computer skills so that users can grasp the basic but highly applicable knowledge in daily computer use.",
+        price: 12000
+    },
+    {
+        rate: 90,
+        title: "Object Oriented-Programming in C++",
+        author: "Zhukyu",
+        description: "General Informatics is the basic subject of Informatics. This course focuses on providing basic and comprehensive knowledge of computer softwares and basic computer skills so that users can grasp the basic but highly applicable knowledge in daily computer use.",
+        price: "Free"
+    },
+    {
+        rate: 50,
+        title: "Object Oriented-Programming in C++",
+        author: "Zhukyu",
+        description: "General Informatics is the basic subject of Informatics. This course focuses on providing basic and comprehensive knowledge of computer softwares and basic computer skills so that users can grasp the basic but highly applicable knowledge in daily computer use.",
+        price: "Free"
+    },
+    {
+        rate: 60,
+        title: "Object Oriented-Programming in C++",
+        author: "Zhukyu",
+        description: "General Informatics is the basic subject of Informatics. This course focuses on providing basic and comprehensive knowledge of computer softwares and basic computer skills so that users can grasp the basic but highly applicable knowledge in daily computer use.",
+        price: "Free"
+    },
+]
 
 function Home() {
     return (
         <div className="App">
             <div className='banner'>
                 <Navbar />
-                {/* <img src={banner} alt="" className='banner-img'></img> */}
             </div>
             <div className="wrap-home">
                 <div className="course-section">
@@ -23,58 +72,42 @@ function Home() {
                         </Link>
                     </div>
                     <div className="row">
-                        <div className="item">
-                            <CourseItem rate={30} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={90} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
+                        {items.map((item) => {
+                            return (
+                                <div className="item">
+                                    <CourseItem
+                                        rate={item.rate}
+                                        title={item.title}
+                                        author={item.author}
+                                        description={item.description}
+                                        price={item.price}
+                                    />
+                                </div>
+                            )
+                        })}
                     </div>
-                </div>
-                <div className="course-section">
-                    <div className="wrap-header">
-                        <span className="header">Features Blogs</span>
-                        <Link to="#" className="all-courses">
-                            <span>All Blogs</span>
-                            <i className="fa-solid fa-greater-than"></i>
-                        </Link>
-                    </div>
-                    <div className="row">
-                        <div className="item">
-                            <CourseItem rate={30} />
+                    <div className="course-section">
+                        <div className="wrap-header">
+                            <span className="header">Features Blogs</span>
+                            <Link to="#" className="all-courses">
+                                <span>All Blogs</span>
+                                <i className="fa-solid fa-greater-than"></i>
+                            </Link>
                         </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={90} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
-                        </div>
-                        <div className="item">
-                            <CourseItem rate={60} />
+                        <div className="row">
+                            {items.map((item) => {
+                                return (
+                                    <div className="item">
+                                        <CourseItem
+                                            rate={item.rate}
+                                            title={item.title}
+                                            author={item.author}
+                                            description={item.description}
+                                            price={item.price}
+                                        />
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

@@ -72,9 +72,9 @@ function Home() {
                         </Link>
                     </div>
                     <div className="row">
-                        {items.map((item) => {
+                        {items.map((item, index) => {
                             return (
-                                <div className="item">
+                                <div className="item" key={index}>
                                     <CourseItem
                                         rate={item.rate}
                                         title={item.title}
@@ -95,9 +95,9 @@ function Home() {
                             </Link>
                         </div>
                         <div className="row">
-                            {items.map((item) => {
+                            {items.map((item, index) => {
                                 return (
-                                    <div className="item">
+                                    <div className="item" key={index}>
                                         <CourseItem
                                             rate={item.rate}
                                             title={item.title}

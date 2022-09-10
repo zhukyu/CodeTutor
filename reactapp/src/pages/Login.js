@@ -5,29 +5,7 @@ import swal from 'sweetalert';
 import { Button } from '../components/Button';
 import '../css/Login.css';
 
-function useOutsideAlerter(ref, clickOutside) {
-    useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
-        function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                clickOutside(false)
-            }
-        }
-        // Bind the event listener
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            // Unbind the event listener on clean up
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [ref]);
-}
-
 function Login(props) {
-    const wrapperRef = useRef(null);
-
-    useOutsideAlerter(wrapperRef, props.clickOutside);
 
     const handleSignUpGhost = () => {
         const container = document.getElementById('container');
@@ -76,63 +54,61 @@ function Login(props) {
     }
 
     return (props.trigger) ? (
-        <div className="login-form" ref={wrapperRef}>
-            <div className="container" id="container">
-                <div className="form-container sign-up-container">
-                    <form action="#">
-                        <h1>Create Account</h1>
-                        <div className="social-container">
-                            <Link to="#" className="social"><i className="fab fa-facebook-f"></i></Link>
-                            <Link to="#" className="social"><i className="fab fa-google-plus-g"></i></Link>
-                        </div>
-                        <span>or use your email for registration</span>
-                        <input type="text" className="input input-name" placeholder="Name" onChange={
-                            (e) => setDataForm({ ...dataForm, "name": e.target.value })
-                        } />
-                        <input type="email" className="input input-email" placeholder="Email" onChange={
-                            (e) => setDataForm({ ...dataForm, "email": e.target.value })
-                        } />
-                        <input type="password" className="input input-password" placeholder="Password" onChange={
-                            (e) => setDataForm({ ...dataForm, "password": e.target.value })
-                        } />
-                        <input type="password" className="input input-password-confirm" placeholder="Confirm Password" onChange={
-                            (e) => setDataForm({ ...dataForm, "confirm_password": e.target.value })
-                        } />
-                        <Button id="signUp-btn" onClick={onSignUp}>Sign Up</Button>
-                        <span className="ghost-mobile" id="signIn-mobile" onClick={handleSignInGhost}>Sign In</span>
-                    </form>
-                </div>
-                <div className="form-container sign-in-container">
-                    <form action="#">
-                        <h1>Sign in</h1>
-                        <div className="social-container">
-                            <Link to="#" className="social"><i className="fab fa-facebook-f"></i></Link>
-                            <Link to="#" className="social"><i className="fab fa-google-plus-g"></i></Link>
-                        </div>
-                        <span>or use your account</span>
-                        <input type="email" className="input input-email" placeholder="Email" onChange={
-                            (e) => setDataForm({ ...dataForm, "email": e.target.value })
-                        } />
-                        <input type="password" className="input input-password" placeholder="Password" onChange={
-                            (e) => setDataForm({ ...dataForm, "password": e.target.value })
-                        } />
-                        <Link to="#" className="forgot-password">Forgot your password?</Link>
-                        <Button id="signIn-btn" onClick={onSignIn}>Sign In</Button>
-                        <span className="ghost-mobile" id="signUp-mobile" onClick={handleSignUpGhost}>Sign Up</span>
-                    </form>
-                </div>
-                <div className="overlay-container">
-                    <div className="overlay">
-                        <div className="overlay-panel overlay-left">
-                            <h1>Welcome Back!</h1>
-                            <p>To keep connected with us please login with your personal info</p>
-                            <button className="ghost" id="signIn" onClick={handleSignInGhost}>Sign In</button>
-                        </div>
-                        <div className="overlay-panel overlay-right">
-                            <h1>Hello, Friend!</h1>
-                            <p>Enter your personal details and start journey with us</p>
-                            <button className="ghost" id="signUp" onClick={handleSignUpGhost}>Sign Up</button>
-                        </div>
+        <div className="container" id="container">
+            <div className="form-container sign-up-container">
+                <form action="#">
+                    <h1>Create Account</h1>
+                    <div className="social-container">
+                        <Link to="#" className="social"><i className="fab fa-facebook-f"></i></Link>
+                        <Link to="#" className="social"><i className="fab fa-google-plus-g"></i></Link>
+                    </div>
+                    <span>or use your email for registration</span>
+                    <input type="text" className="input input-name" placeholder="Name" onChange={
+                        (e) => setDataForm({ ...dataForm, "name": e.target.value })
+                    } />
+                    <input type="email" className="input input-email" placeholder="Email" onChange={
+                        (e) => setDataForm({ ...dataForm, "email": e.target.value })
+                    } />
+                    <input type="password" className="input input-password" placeholder="Password" onChange={
+                        (e) => setDataForm({ ...dataForm, "password": e.target.value })
+                    } />
+                    <input type="password" className="input input-password-confirm" placeholder="Confirm Password" onChange={
+                        (e) => setDataForm({ ...dataForm, "confirm_password": e.target.value })
+                    } />
+                    <Button id="signUp-btn" onClick={onSignUp}>Sign Up</Button>
+                    <span className="ghost-mobile" id="signIn-mobile" onClick={handleSignInGhost}>Sign In</span>
+                </form>
+            </div>
+            <div className="form-container sign-in-container">
+                <form action="#">
+                    <h1>Sign in</h1>
+                    <div className="social-container">
+                        <Link to="#" className="social"><i className="fab fa-facebook-f"></i></Link>
+                        <Link to="#" className="social"><i className="fab fa-google-plus-g"></i></Link>
+                    </div>
+                    <span>or use your account</span>
+                    <input type="email" className="input input-email" placeholder="Email" onChange={
+                        (e) => setDataForm({ ...dataForm, "email": e.target.value })
+                    } />
+                    <input type="password" className="input input-password" placeholder="Password" onChange={
+                        (e) => setDataForm({ ...dataForm, "password": e.target.value })
+                    } />
+                    <Link to="#" className="forgot-password">Forgot your password?</Link>
+                    <Button id="signIn-btn" onClick={onSignIn}>Sign In</Button>
+                    <span className="ghost-mobile" id="signUp-mobile" onClick={handleSignUpGhost}>Sign Up</span>
+                </form>
+            </div>
+            <div className="overlay-container">
+                <div className="overlay">
+                    <div className="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>To keep connected with us please login with your personal info</p>
+                        <button className="ghost" id="signIn" onClick={handleSignInGhost}>Sign In</button>
+                    </div>
+                    <div className="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Enter your personal details and start journey with us</p>
+                        <button className="ghost" id="signUp" onClick={handleSignUpGhost}>Sign Up</button>
                     </div>
                 </div>
             </div>

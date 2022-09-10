@@ -1,10 +1,9 @@
-import React, { Component, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MenuItems } from './MenuItems'
 import '../../css/Navbar.css'
 import logo from '../../logo.svg';
 import { Button } from '../Button';
 import { Link } from 'react-router-dom';
-import Popup from "reactjs-popup";
 import Login from '../../pages/Login';
 import Searchbar from '../Searchbar';
 
@@ -12,25 +11,27 @@ function Navbar() {
     const [clicked, setClicked] = useState(false);
     const [popup, setPopup] = useState(false);
 
-    const isInitialMount = useRef(true);
-
-    useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-        } else {
-            // Your useEffect code here to be run on update
-            var element = document.getElementsByClassName('App')[0];
-            if (popup) {
-                element.classList.add('disabled');
-            }
-            else {
-                element.classList.remove('disabled');
-            }
-        }
-    });
-
     const handleClick = () => {
         setClicked(!clicked);
+    }
+
+    const handleNavMenuPopup = (e) => {
+        if (e.target === e.currentTarget) {
+            setClicked(!clicked);
+        }
+    }
+
+    const handleLoginPopup = (e) => {
+        if (e.target === e.currentTarget) {
+            setPopup(!popup)
+            var item = document.querySelector('.popup-login');
+            if (!popup) {
+                item.classList.add('is-active');
+            }
+            else {
+                item.classList.remove('is-active');
+            }
+        }
     }
 
     const handleIndicator = (e) => {
@@ -55,22 +56,24 @@ function Navbar() {
                     <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
                 </div>
 
-                <div className={clicked ? 'nav-menu active' : 'nav-menu'}>
-                    {MenuItems.map((item, index) => {
-                        return (
-                            <Link key={index} to={item.url} className={item.cName} onClick={handleIndicator.bind(this)}>
-                                {item.title}
-                            </Link>
-                        )
-                    })}
-                    <div className="container-signIn">
-                        <Button buttonSize={'btn--medium'} className="btn-signIn-popup" onClick={() => setPopup(!popup)}>Sign In</Button>
+                <div className={clicked ? "popup-nav-menu is-active" : "popup-nav-memu"} onClick={handleNavMenuPopup}>
+                    <div className={clicked ? "nav-menu is-active" : "nav-menu"}>
+                        {MenuItems.map((item, index) => {
+                            return (
+                                <Link key={index} to={item.url} className={item.cName} onClick={handleIndicator}>
+                                    {item.title}
+                                </Link>
+                            )
+                        })}
+                        <div className="container-signIn">
+                            <Button buttonSize={'btn--medium'} className="btn-signIn-popup" onClick={handleLoginPopup}>Sign In</Button>
+                        </div>
                     </div>
                 </div>
 
             </nav>
-            <div className="popup">
-                <Login trigger={popup} clickOutside={setPopup} />
+            <div className="popup-login" onClick={handleLoginPopup}>
+                <Login trigger={popup} />
             </div>
         </div>
     )

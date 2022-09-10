@@ -70,7 +70,6 @@
     grid-gap: 10px;
     list-style: none;
     text-align: center;
-    width: 50%;
     justify-content: flex-end;
 }
 
@@ -108,36 +107,54 @@
     padding: 15px;
 }
 
+.popup-login.is-active {
+    transition: all 0.2s ease;
+    z-index: 13;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 @media (max-width: 1075px) {
     .NavbarItems {
-        height: 70px;
-        position: fixed;
-        width: 100%;
-    }
-
-    .NavbarItems:not(.scrolled) {
         border-radius: 0;
         top: 0;
-        position: fixed;
+        height: 70px;
         width: 100%;
+        gap: 0;
+    }
+
+    .NavbarItems.scrolled {
+        gap: 0;
+    }
+
+    .popup-nav-menu.is-active {
+        transition: all 0.2s ease;
+        top: 70px;
+        position:inherit;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
     }
 
     .nav-menu {
+        position: fixed;
+        z-index: 14;
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 384px;
-        position: absolute;
         top: 70px;
         left: -100%;
         transition: all 0.5s ease;
     }
 
-    .nav-menu.active {
+    .nav-menu.is-active {
         background: #fff;
         left: 0;
         opacity: 1;
-        z-index: 1;
+        z-index: 10;
     }
 
     .nav-links {
@@ -153,7 +170,7 @@
     }
 
     .nav-links.is-active {
-        border-bottom: 2px solid #57D9AC; 
+        border-bottom: 2px solid #57D9AC;
     }
 
     .logo {
@@ -171,19 +188,27 @@
     }
 
     .menu-icon {
+        text-align: center;
         display: block;
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
-        transform: translate(-100%, 60%);
+        transform: translate(-100%, 50%);
         font-size: 1.8rem;
         cursor: pointer;
     }
 
-    .fa-times {
+    .fa-bars {
+        width: 32px;
+        height: 32px;
         color: #333;
-        font-size: 2.2rem;
-        margin-right: 3px;
+    }
+
+    .fa-times {
+        width: 32px;
+        height: 32px;
+        color: #333;
+        font-size: 2rem;
     }
 
     .container-signIn {
@@ -194,7 +219,7 @@
     }
 
     .btn-signIn-popup {
-        width: 80%;
+        width: 100%;
         margin: 20px 0
     }
 

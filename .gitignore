@@ -4,3 +4,4 @@
 /laravelapi/public/storage
 /laravelapi/storage/*.key
 /laravelapi/vendor
+/laravelapi/.env

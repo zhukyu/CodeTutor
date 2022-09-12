@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,7 +23,12 @@ class UsersController extends Controller
         return response()->json(['user' => $users,], 200);
     }
 
-    public function onLogin(Request $request)
+    public function user()
+    {
+        return Auth::user();
+    }
+
+    public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|max:191',
@@ -34,27 +40,26 @@ class UsersController extends Controller
             ]);
         } else {
             $user = User::where('email', $request->email)->first();
-
             if (!$user || !Hash::check($request->password, $user->password)) {
-
                 return response()->json([
                     'status' => 401,
                     'message' => 'Invalid Credentials',
                 ]);
             } else {
-                $token = $user->createToken($user->email . '_Token')->plainTextToken;
+                $token = $user->createToken('token')->plainTextToken;
 
+                $cookie = cookie('jwt', $token, 60 * 24);
                 return response()->json([
                     'status' => 200,
                     'username' => $user->name,
-                    'token' => $token,
                     'message' => 'Logged In Successfully',
-                ]);
+                    'token' => $token,
+                ])->withCookie($cookie);
             }
         }
     }
 
-    public function onRegister(Request $request)
+    public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',

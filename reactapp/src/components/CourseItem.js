@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom'
 import '../css/CourseItem.css'
 
 function CourseItem(props) {
-    const price = (input) => {
-        
-    }
     return (
         <div className="course-item">
             <div className="course-image">

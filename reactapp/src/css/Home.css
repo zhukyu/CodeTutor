@@ -1,12 +1,128 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+
 
 .banner {
     position: relative;
     height: 100vh;
-    background-image: url('../img/home_banner.jpg');
+    background-image: url('../img/banner_background.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    color: white;
+}
+
+.wrap-banner {
+    padding-top: 18vh;
+    padding-bottom: 12vh;
+    display: flex;
+    margin: 0 100px;
+    transition: all 0.3s;
+}
+
+.wrap-banner-img {
+    width: 50vw;
+    display: flex;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.banner-img {
+    transition: all 0.3s;
+    background-color: white;
+    height: 70vh;
+    width: 70%;
+    position: relative;
+    align-items: flex-end;
+    justify-content: flex-end;
+    border-radius: 15px;
+    object-fit: cover;
+    z-index: 7;
+    /* margin-left: -5px; */
+}
+
+.banner-img-dot {
+    top: 30%;
+    left: 3%;
+    position: absolute;
+    z-index: 7;
+    width: 17vw;
+    transition: all 0.3s;
+}
+
+.banner-stat {
+    transition: all 0.3s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 8;
+    width: 275px;
+    height: 200px;
+    border-radius: 15px;
+    background-color: #fff;
+    color: #333;
+    padding: 20px 10px;
+    box-shadow: 10px -10px;
+}
+
+.stat-courses,
+.stat-members,
+.stat-teachers {
+    margin-bottom: 20px;
+    display: flex;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+.banner-stat i {
+    margin: 0 5px;
+    width: 40px;
+    color: #57D9AC;
+    justify-content: center;
+
+}
+
+.banner-stat p {
+    font-family: nunito, sans-serif;
+    font-weight: 700;
+}
+
+.wrap-banner-paragraph {
+    position: relative;
+    padding: 25px 40px;
+    width: 50vw;
+    display: block;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.banner-paragraph {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.banner .banner-header {
+    font-weight: 700;
+    font-family: nunito, sans-serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.banner .banner-description {
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 1.3rem;
+    text-align: justify;
+}
+
+.banner button {
+    width: 150px;
+    margin-top: 30px;
+    white-space: nowrap;
+}
+
+:target {
+    padding-top: 70px;
 }
 
 .wrap-home {
@@ -31,7 +147,7 @@
 .header {
     font-family: 'Nunito', sans-serif;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 800;
     color: #333;
     transition: 0.3s;
 }
@@ -47,7 +163,7 @@
     margin-right: 5px;
 }
 
-.all-courses:hover{
+.all-courses:hover {
     text-decoration: underline;
     transition: 0.2s ease-in;
 }
@@ -69,6 +185,78 @@
     width: 25%;
     margin-bottom: 10px;
     transition: 0.3s;
+}
+
+@media (max-width: 1370px) {
+    .banner-img {
+        height: 60vh;
+    }
+    .banner-stat {
+        top: 45%;
+        left: 40%;
+    }
+}
+
+@media (max-width: 1160px) {
+    .banner-img {
+        height: 55vh;
+    }
+    .banner-stat {
+        top: 40%;
+    }
+}
+
+@media (max-width: 1075px) {
+    .wrap-banner {
+        margin: 0 50px;
+    }
+    .banner-img {
+        height: 55vh;
+    }
+    .banner-stat {
+        top: 40%;
+        left: 35%;
+    }
+}
+
+@media (max-width: 910px) {
+    .banner {
+        height: 180vh;
+        background-position: 65%;
+    }
+    .wrap-banner {
+        padding-top: 0;
+        flex-direction: column-reverse
+    }
+    .wrap-banner-paragraph {
+        padding: 0;
+        height: 100vh;
+        width: 100%;
+        justify-content: center;
+    }
+    /* .banner-paragraph {
+    } */
+    .banner button {
+        align-items: center;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+    .wrap-banner-img {
+        width: 100%;
+        display: flex;
+    }
+    .banner-img {
+        margin-left: 10%;
+        width: 90%;
+        height: 60vh;
+    }
+    .banner-img-dot {
+        top: 50%;
+        left: 85%;
+    }
+    .banner-stat {
+        left: 0;
+    }
 }
 
 @media (max-width: 1400px) {
@@ -93,6 +281,7 @@
     .wrap-home {
         width: 85%;
     }
+
     .item {
         width: 100%;
     }
@@ -102,6 +291,7 @@
     .wrap-header {
         justify-content: flex-start;
     }
+
     .all-courses span {
         display: none;
     }

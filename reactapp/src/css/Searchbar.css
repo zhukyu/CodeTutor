@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100vh;
+    width: 70%;
     height: 35px;
     border-radius: 20px;
 }

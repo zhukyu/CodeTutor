@@ -25,7 +25,7 @@ function Login(props) {
             const _formData = new FormData();
             _formData.append("email", dataForm.email)
             _formData.append("password", dataForm.password)
-            axios.post(`http://127.0.0.1:8000/api/users/login`, _formData).then(res => {
+            axios.post(`http://127.0.0.1:8000/api/auth/login`, _formData).then(res => {
                 if (res.data.status === 200) {
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.username);
@@ -45,7 +45,7 @@ function Login(props) {
                 method: 'POST',
                 body: _formData
             };
-            fetch('http://127.0.0.1:8000/api/users', requestOptions)
+            fetch('http://127.0.0.1:8000/api/auth/register', requestOptions)
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)

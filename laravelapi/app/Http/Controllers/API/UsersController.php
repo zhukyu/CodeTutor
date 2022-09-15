@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +11,15 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,40 +31,42 @@ class UsersController extends Controller
         return response()->json(['user' => $users,], 200);
     }
 
-    public function user()
-    {
-        return Auth::user();
-    }
-
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|max:191',
-            'password' => 'required'
+            'email' => 'required|string|email',
+            'password' => 'required|string',
         ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'validation_errors' => $validator->errors(),
-            ]);
-        } else {
-            $user = User::where('email', $request->email)->first();
-            if (!$user || !Hash::check($request->password, $user->password)) {
-                return response()->json([
-                    'status' => 401,
-                    'message' => 'Invalid Credentials',
-                ]);
-            } else {
-                $token = $user->createToken('token')->plainTextToken;
 
-                $cookie = cookie('jwt', $token, 60 * 24);
-                return response()->json([
-                    'status' => 200,
-                    'username' => $user->name,
-                    'message' => 'Logged In Successfully',
-                    'token' => $token,
-                ])->withCookie($cookie);
-            }
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
+
+        $credentials = $request->only('email', 'password');
+
+        // $token = Auth::attempt($credentials);
+        // if (!$token) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Unauthorized',
+        //     ], 401);
+        // }
+
+        // $user = Auth::user();
+
+        // return response()->json([
+        //     'status' => 'success',
+        //     'user' => $user,
+        //     'authorisation' => [
+        //         'token' => $token,
+        //         'type' => 'bearer',
+        //     ]
+        // ]);
+        if (!$token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->createNewToken($token);
     }
 
     public function register(Request $request)
@@ -68,27 +78,94 @@ class UsersController extends Controller
             'confirm_password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $postArray = [
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => Hash::make($request->password),
-            'remember_token' => $request->token,
-            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-            // 'avatar' => $request->file('UrlImage')->getClientOriginalName()
-        ];
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        // if ($request->hasFile('UrlImage')) {
-        //     $image = $request->file('UrlImage');
-        //     $name = $image->getClientOriginalName();
-        //     $destinationPath = public_path('/upload/images');
-        //     $imagePath = $destinationPath . "/" . $name;
-        //     $image->move($destinationPath, $name);
-        // }
-        $user = User::create($postArray);
-        return Response()->json(array("success" => 1, "data" => $postArray));
+        $token = Auth::login($user);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User created successfully',
+            'user' => $user,
+            'authorisation' => [
+                'token' => $token,
+                'type' => 'bearer',
+            ]
+        ]);
+    }
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'User successfully signed out']);
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->createNewToken(auth()->refresh());
+    }
+
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function userProfile()
+    {
+        return response()->json(auth()->user());
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function createNewToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
+        ]);
+    }
+
+    public function changePassWord(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required|string|min:6',
+            'new_password' => 'required|string|confirmed|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $userId = auth()->user()->id;
+
+        $user = User::where('id', $userId)->update(
+            ['password' => bcrypt($request->new_password)]
+        );
+
+        return response()->json([
+            'message' => 'User successfully changed password',
+            'user' => $user,
+        ], 201);
     }
 }

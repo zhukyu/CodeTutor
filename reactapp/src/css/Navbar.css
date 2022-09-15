@@ -116,6 +116,21 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.hide {
+    display: none;
+}
+
+.container-avatar {
+    padding: 12px;
+    width: 108px;
+}
+
+.container-avatar-mobile {
+    padding: 12px;
+    width: 108px;
+    display: flex;
+}
+
 @media (max-width: 1075px) {
     .NavbarItems {
         border-radius: 0;
@@ -132,7 +147,7 @@
     .popup-nav-menu.is-active {
         transition: all 0.2s ease;
         top: 70px;
-        position:inherit;
+        position: inherit;
         width: 100vw;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.5);

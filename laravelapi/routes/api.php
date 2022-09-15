@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,17 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('products', [ProductController::class, 'index']);
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
-Route::middleware('auth:sanctum')->group(function (){
-    Route::get('/user', [App\Http\Controllers\API\UsersController::class, 'user']);
+], function ($router) {
+    Route::post('/login', [UsersController::class, 'login']);
+    Route::post('/register', [UsersController::class, 'register']);
+    Route::post('/logout', [UsersController::class, 'logout']);
+    Route::post('/refresh', [UsersController::class, 'refresh']);
+    Route::get('/user-profile', [UsersController::class, 'userProfile']);
+    Route::post('/change-pass', [UsersController::class, 'changePassWord']);    
 });
-
-/* Api Register */
-Route::get('token', function (Request $request) {
-    $token = $request->session()->token();
-    $token = csrf_token();
-    return Response()->json(array("token" => $token));
-});
-Route::post('login', [App\Http\Controllers\API\UsersController::class, 'login']);
-Route::post('register', [App\Http\Controllers\API\UsersController::class, 'register']);

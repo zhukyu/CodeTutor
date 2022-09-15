@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { MenuItems } from './MenuItems'
 import '../../css/Navbar.css'
 import logo from '../../logo.svg';
 import { Button } from '../Button';
 import { Link } from 'react-router-dom';
-import Login from '../../pages/Login';
+import Login from '../Login';
 import Searchbar from '../Searchbar';
+import ProfileMenu from '../ProfileMenu'
 
 function Navbar() {
     const [clicked, setClicked] = useState(false);
@@ -52,6 +53,9 @@ function Navbar() {
                     <h1 className="logo-title">Code Tutor</h1>
                 </div>
                 <Searchbar />
+                <div className="container-avatar-mobile">
+                    <ProfileMenu />
+                </div>
                 <div className="menu-icon" onClick={handleClick}>
                     <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
                 </div>
@@ -65,8 +69,11 @@ function Navbar() {
                                 </Link>
                             )
                         })}
-                        <div className="container-signIn">
+                        <div className="container-signIn hide">
                             <Button buttonSize={'btn--medium'} className="btn-signIn-popup" onClick={handleLoginPopup}>Sign In</Button>
+                        </div>
+                        <div className="container-avatar hide">
+                            <ProfileMenu />
                         </div>
                     </div>
                 </div>

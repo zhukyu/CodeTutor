@@ -5,3 +5,4 @@
 /laravelapi/storage/*.key
 /laravelapi/vendor
 /laravelapi/.env
+/node_modules

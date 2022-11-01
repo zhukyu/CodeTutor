@@ -37,18 +37,16 @@
 }
 
 .dropdown {
-    left: -25%;
+    position: absolute;
+    right: 1%;
     width: 130px;
-    padding: 15px 0;
+    padding: 12px 0;
     justify-content: center;
     color: #333;
     background: #fff;
-    position: relative;
-    font-size: 18px;
-    perspective: 1000px;
     z-index: 100;
     display: none;
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 0 10px 30px rgba(135, 135, 135, 0.5);
     margin-top: 5px;
     animation: growOut 0.3s ease-in-out forwards;
@@ -56,16 +54,8 @@
 }   
 
 .dropdown.is-active {
-    display: block;
-    position: absolute;
-    top: 12%;
-    left: 16%;
     display: flex;
     flex-direction: column;
-}
-
-.dropdown:hover {
-    cursor: pointer;
 }
 
 .dropdown-item {
@@ -76,7 +66,7 @@
 
 .dropdown .divider {
     height: 1px;
-    margin: 5px 0;
+    margin: 10px 0;
     overflow: hidden;
     background-color: #e5e5e5;
 }
@@ -85,6 +75,7 @@
     transition: 0.2s;
     color: #fff;
     background-color: #57D9AC;
+    cursor: pointer;
 }
 
 @keyframes growOut {

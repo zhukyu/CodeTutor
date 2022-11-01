@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
 import { Button } from '../components/Button';
 import '../css/Login.css';
 
 function Login(props) {
+
+    const navigate = useNavigate();
 
     const handleSignUpGhost = () => {
         const container = document.getElementById('container');
@@ -20,16 +21,18 @@ function Login(props) {
         "email": "",
         "password": ""
     });
-    const onSignIn = () => {
+    const onSignIn = (e) => {
+        e.preventDefault();
         if (dataForm.email !== "" && dataForm.password !== "") {
             const _formData = new FormData();
             _formData.append("email", dataForm.email)
             _formData.append("password", dataForm.password)
-            axios.post(`http://127.0.0.1:8000/api/auth/login`, _formData).then(res => {
-                if (res.data.status === 200) {
-                    localStorage.setItem('auth_token', res.data.token);
-                    localStorage.setItem('auth_name', res.data.username);
-                    console.log(res);
+            axios.post(`/auth/login`, _formData).then(res => {
+                if (res.status === 200) {
+                    localStorage.setItem('access_token', res.data.access_token);
+                    localStorage.setItem('user_name', res.data.user.name);
+                    localStorage.setItem('user_id', res.data.user.id);
+                    navigate(0);
                 }
             })
         }
@@ -41,15 +44,13 @@ function Login(props) {
             _formData.append("email", dataForm.email)
             _formData.append("password", dataForm.password)
             _formData.append("confirm_password", dataForm.confirm_password)
-            const requestOptions = {
-                method: 'POST',
-                body: _formData
-            };
-            fetch('http://127.0.0.1:8000/api/auth/register', requestOptions)
-                .then(res => res.json())
-                .then(json => {
-                    console.log(json)
-                });
+            
+            axios.post(`/auth/register`, _formData).then(res => {
+                if (res.status === 200) {
+                    console.log(res);
+                    navigate(0);
+                }
+            })
         }
     }
 

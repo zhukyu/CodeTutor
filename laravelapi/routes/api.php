@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CourseController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\UsersController;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'json.response',
     'prefix' => 'auth'
 
 ], function ($router) {
@@ -26,5 +27,11 @@ Route::group([
     Route::post('/logout', [UsersController::class, 'logout']);
     Route::post('/refresh', [UsersController::class, 'refresh']);
     Route::get('/user-profile', [UsersController::class, 'userProfile']);
-    Route::post('/change-pass', [UsersController::class, 'changePassWord']);    
+    Route::post('/change-pass', [UsersController::class, 'changePassWord']);
+    Route::post('/add-product', [UsersController::class, 'store']);
+    Route::post('/add-product', [ProductController::class, 'store']);
+    Route::post('/add-course', [CourseController::class, 'store']);
 });
+
+Route::get('/courses', [CourseController::class, 'index']);
+Route::get('/course/{id}', [CourseController::class, 'detail']);

@@ -237,9 +237,8 @@
     /* .banner-paragraph {
     } */
     .banner button {
-        align-items: center;
-        margin-left: 50%;
-        transform: translateX(-50%);
+        margin-left: auto;
+        margin-right: auto;
     }
     .wrap-banner-img {
         width: 100%;

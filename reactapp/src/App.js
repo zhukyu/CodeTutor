@@ -2,32 +2,48 @@ import './css/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import Home from './pages/Home';
-import Login from '../src/components/Login';
-
-
+import Http from './components/Http';
+import DefaultLayout from './components/DefaultLayout';
+import Courses from './pages/Courses';
+import Blogs from './pages/Blogs';
+import AddCourse from './pages/AddCourse';
+import CourseDetail from './pages/CourseDetail';
 
 function App() {
-  useEffect(() => {
-    const handleScroll = event => {
-      if (window.scrollY > 60) {
-        document.querySelector('.NavbarItems').classList.add('scrolled');
-      }
-      else {
-        document.querySelector('.NavbarItems').classList.remove('scrolled');
-      }
-    };
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
+        <Route path="/" element={
+          <DefaultLayout>
+            <Home />
+          </DefaultLayout>
+        }
+        />
+        <Route path="courses" element={
+          <DefaultLayout>
+            <Courses />
+          </DefaultLayout>
+        }
+        />
+        <Route path="blogs" element={
+          <DefaultLayout>
+            <Blogs />
+          </DefaultLayout>
+        }
+        />
+        <Route path="add-course" element={
+          <DefaultLayout>
+            <AddCourse />
+          </DefaultLayout>
+        }
+        />
+        <Route path="course/:id" element={
+          <DefaultLayout>
+            <CourseDetail />
+          </DefaultLayout>
+        }
+        />
       </Routes>
     </Router>
   );

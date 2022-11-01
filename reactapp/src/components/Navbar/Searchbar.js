@@ -1,6 +1,6 @@
 import React from 'react'
-import '../css/Searchbar.css'
-import { Button } from './Button'
+import '../../css/Searchbar.css'
+import { Button } from '../Button'
 
 function Searchbar() {
     return (

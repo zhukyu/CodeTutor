@@ -1,6 +1,5 @@
 .search {
     transition: all 0.5s;
-    margin: 0 auto;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -41,10 +40,4 @@
 .searchButton:hover {
     width: 70px;
     padding: 0;
-}
-
-@media (max-width: 980px) {
-    .search {
-        width: 50%;
-    }
 }

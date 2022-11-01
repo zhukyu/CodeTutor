@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Routing\Router;
 
 class Kernel extends HttpKernel
 {
@@ -67,5 +69,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'json.response' => \App\Http\Middleware\ForceJsonResponse::class,
     ];
+    public function __construct( Application $app, Router $router ) {
+        parent::__construct( $app, $router );
+        $this->prependToMiddlewarePriority(\App\Http\Middleware\ForceJsonResponse::class);
+    }
 }

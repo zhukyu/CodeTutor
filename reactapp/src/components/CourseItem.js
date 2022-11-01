@@ -5,16 +5,19 @@ import '../css/CourseItem.css'
 function CourseItem(props) {
     return (
         <div className="course-item">
-            <div className="course-image">
-                <img src="https://www.w3schools.com/css/lights600x400.jpg" alt="" />
-            </div>
+            <Link to={`/course/${props.id}`}>
+                <div className="course-image">
+                    <img src={props.image} alt="" />
+                </div>
+            </Link>
+
             <div className="course-content">
                 <span className="star-rating">
-                    <span style={{width: `${props.rate}%`}}>
-                    </span> 
+                    <span style={{ width: `${props.rate}%` }}>
+                    </span>
                 </span>
                 <div className="course-title">
-                    <Link to="#" >{props.title}</Link>
+                    <Link to={`/course/${props.id}`} >{props.title}</Link>
                 </div>
                 <div className="course-author">
                     <Link to="#">{props.author}</Link>

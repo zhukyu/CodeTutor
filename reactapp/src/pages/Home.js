@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import CourseItem from '../components/CourseItem';
 import Navbar from '../components/Navbar/Navbar';
+import LoadingScreen from "react-loading-screen"
 import '../css/Home.css';
 import bannerImg from '../img/banner_image.jpg'
 import dot from '../img/dot.svg'
+import Footer from '../components/Footer';
 
 let items = [
     {
@@ -62,7 +64,7 @@ let items = [
 
 function Home() {
 
-    const [courses, setCourses] = useState([]);
+    const [courses, setCourses] = useState(null);
     // minimize navbar
     useEffect(() => {
         document.querySelector('.NavbarItems').classList.add('scrolled');
@@ -97,7 +99,7 @@ function Home() {
 
     return (
         <div>
-            <Navbar current={0}/>
+            <Navbar current={0} />
             <div className="Home">
                 <div className="banner">
                     <div className="wrap-banner">
@@ -128,7 +130,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="wrap-home">
+                {courses ? <div className="wrap-home">
                     <div className="course-section" id="course-section">
                         <div className="wrap-header">
                             <span className="header">Features Courses</span>
@@ -179,8 +181,20 @@ function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> : <div>
+                    <LoadingScreen
+                        loading={true}
+                        bgColor="rgba(0, 0, 0, 0.2)"
+                        spinnerColor="#84fab0"
+                        textColor="#676767"
+                        logoSrc=""
+                        text=""
+                    >
+                    </LoadingScreen>
+                    <div style={{ height: "100vh" }}></div>
+                </div>}
             </div>
+            <Footer />
         </div>
     )
 }

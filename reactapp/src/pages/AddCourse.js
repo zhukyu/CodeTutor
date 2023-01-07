@@ -5,6 +5,8 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import '../css/AddCourse.css'
 import axios from 'axios'
 import Navbar from '../components/Navbar/Navbar'
+import { Button } from '../components/Button'
+import Footer from '../components/Footer'
 
 function AddCourse() {
     let imageUrl;
@@ -75,93 +77,95 @@ function AddCourse() {
         });
     }
 
-    const handleImage = (files) => {
+    const handleImage = (event) => {
         setCourse({
             ...course,
-            image: files[0],
+            image: event.target.files[0],
         })
+
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("loadedImg");
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function (event) {
+            imgtag.src = event.target.result;
+        };
+
+        reader.readAsDataURL(selectedFile);
     }
 
     return (
         <div>
-            <Navbar current={1}/>
+            <Navbar current={1} />
             <div className="add-course">
                 <div className="">
-                    <h4 className=''>Add Course
-                        <Link to={'/'} className="">Back</Link>
-                    </h4>
+                    <h4 className='header'>Add Course</h4>
+                    <Link to={'/courses'} className="">Back</Link>
                 </div>
                 <div className=''>
                     <form onSubmit={handleImageUpload}>
-                        <div className="">
-                            <div className="">
-                                <label className="">
-                                    Course Name
-                                </label>
-                                <div className="">
-                                    <input
-                                        name="title"
-                                        type="text"
-                                        className=""
-                                        onChange={handleInput}
-                                    />
-                                </div>
-                            </div>
+                        <div className="form-row">
+                            <label className="form-header">
+                                Course Name
+                            </label>
+                            <input
+                                name="title"
+                                type="text"
+                                className="form-input"
+                                onChange={handleInput}
+                            />
                         </div>
-                        <div>
-                            <label className="">
+                        <div className='form-row'>
+                            <label className="form-header">
                                 Description
                             </label>
-                            <div className="">
-                                <textarea
-                                    name="description"
-                                    rows={3}
-                                    className=""
-                                    onChange={handleInput}
-                                    defaultValue={''}
-                                />
-                            </div>
+                            <textarea
+                                name="description"
+                                rows={3}
+                                className="form-input"
+                                onChange={handleInput}
+                                defaultValue={''}
+                            />
                         </div>
-                        <div className="">
-                            <label className="">
+                        <div className="form-row">
+                            <label className="form-header">
                                 Price
                             </label>
-                            <div className="">
+                            <input
+                                name="price"
+                                type="text"
+                                className="form-input"
+                                onChange={handleInput}
+                            />
+                        </div>
+                        <div className="form-row">
+                            <label className="form-header">
+                                Image
+                            </label>
+                            <label class="custom-file-upload">
                                 <input
-                                    name="price"
-                                    type="text"
-                                    className=""
-                                    onChange={handleInput}
+                                    name="image"
+                                    type='file'
+                                    id='image'
+                                    className="form-input"
+                                    placeholder="www.example.com"
+                                    onChange={(e) => handleImage(e)}
                                 />
-                            </div>
+                                <i class="fa fa-cloud-upload"></i> Image Upload
+                            </label>
+                        </div>
+                        <div className='form-image'>
+                            <img src={course.image} id="loadedImg" className="img-fluid img-bordered" width="200px" />
                         </div>
                         <div className="">
-                            <div className="">
-                                <label className="">
-                                    Image
-                                </label>
-                                <div className="">
-                                    <input
-                                        name="image"
-                                        type='file'
-                                        id='image'
-                                        className=""
-                                        placeholder="www.example.com"
-                                        onChange={(e) => handleImage(e.target.files)}
-                                    />
-                                </div>
-                            </div>
+                            <Button type="submit" className=''>Save Course</Button>
                         </div>
-                        {/* <div className='form-group my-3'>
-                        <img src={course.image} id="loadedImg" className="img-fluid img-bordered" width="200px" />
-                    </div> */}
-                        <div className="">
-                            <button type="submit" className=''>Save Course</button>
-                        </div>
-                        <button type="button" onClick={handleImageUpload}>asd</button>
                     </form>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

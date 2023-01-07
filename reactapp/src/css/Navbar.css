@@ -35,6 +35,7 @@
     cursor: pointer;
     gap: 10px;
     display: flex;
+    text-decoration: none;
 }
 
 .NavbarItems.scrolled>.logo {

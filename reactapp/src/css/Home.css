@@ -126,7 +126,7 @@
 }
 
 .wrap-home {
-    width: 1300px;
+    width: 90%;
     padding: 0 15px;
     margin: 0 auto;
     transition: 0.3s;
@@ -146,7 +146,7 @@
 
 .header {
     font-family: 'Nunito', sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 800;
     color: #333;
     transition: 0.3s;

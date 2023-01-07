@@ -93,10 +93,10 @@ function Navbar(props) {
     return (
         <div className="Navbar">
             <nav className={"NavbarItems scrolled"}>
-                <div className="logo">
+                <Link to='/' className="logo">
                     <img className="logo-icon" src={logo} alt="logo" />
                     <h1 className="logo-title">Code Tutor</h1>
-                </div>
+                </Link>
                 <Searchbar />
                 <div className={clicked ? "nav-menu-mask is-active" : "nav-menu-mask"} onClick={handleNavMenuPopup}>
                 </div>

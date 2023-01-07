@@ -1,3 +1,56 @@
 .add-course{
-    padding-top: 100px;
+    margin: 100px 50px;
+    margin-bottom: 50px;
+    height: 84vh;
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(159, 162, 177, 0.5);
+}
+
+.form-row {
+    margin: 5px 0;
+}
+
+.form-row * {
+    vertical-align: middle;
+}
+
+.add-course .form-header {
+    width: 150px;
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.add-course input {
+    border-radius: 15px;
+    border: 1px solid #bcbcbc;
+    height: 30px;
+    padding: 0 10px;
+    width: 200px;
+}
+
+.add-course textarea {
+    border-radius: 15px;
+    border: 1px solid #bcbcbc;
+    resize: none;
+    padding: 5px 10px;
+    width: 200px;
+}
+
+.custom-file-upload {
+    border: 1px solid #bcbcbc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 200px;
+}
+
+.custom-file-upload input {
+    display: none;
+}
+
+.custom-file-upload i {
+    color: #333;
 }

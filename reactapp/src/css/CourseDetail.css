@@ -1,7 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
 
 .CourseDetail {
-    padding-top: 100px;
+    padding-top: 120px;
     margin: 0 auto;
-    width: 90%;
+    width: 95%;
+    display: flex;
+    min-height: 100vh;
+}
+
+.CourseDetail .left-section {
+    width: calc(100% * 2 / 3);
+    padding: 0 20px;
+}
+
+.CourseDetail .right-section {
+    display: flex;
+    justify-content: flex-end;
+    width: calc(100% / 3);
+    padding: 0 20px;
+}
+
+.CourseDetail .header {
+    margin: 15px 0;
+}
+
+.CourseDetail .description {
+    font-family: Source Sans Pro, sans-serif;
+    font-weight: 500;
+}
+
+.CourseDetail .course-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-box img {
+    border-radius: 15px;
+}
+
+.course-box button {
+    margin: 20px auto;
+    width: 150px;
+}
+
+.CourseDetail img {
+    width: 100%;
+}
+
+.CourseDetail .content-list {
+    list-style-type: none;
+}
+
+.CourseDetail .content-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.03);
+    line-height: 35px;
+}
+
+.CourseDetail .lesson-name i{
+    color: #57D9AC;
+    margin-right: 10px;
 }

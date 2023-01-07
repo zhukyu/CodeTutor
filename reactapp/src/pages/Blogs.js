@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar/Navbar';
 
 function Blogs() {
@@ -11,6 +12,7 @@ function Blogs() {
             <div className='Blogs'>
 
             </div>
+            <Footer/>
         </div>
     )
 }

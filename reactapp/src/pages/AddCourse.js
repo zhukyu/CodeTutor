@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom'
 import storage from '../components/firebaseConfig'
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import '../css/AddCourse.css'
+import '../css/CourseDetail.css'
 import axios from 'axios'
 import Navbar from '../components/Navbar/Navbar'
 import { Button } from '../components/Button'
 import Footer from '../components/Footer'
 
 function AddCourse() {
-    let imageUrl;
+    let imageUrl
+
+    const [loadedImgSrc, setLoadedImgSrc] = useState('https://www.studytienganh.vn/upload/2021/06/106292.jpg');
 
     const [course, setCourse] = useState({
-        title: '',
-        description: '',
+        title: 'Course Name',
+        description: 'Course description',
         price: '',
         image: '',
     })
@@ -86,14 +89,17 @@ function AddCourse() {
         var selectedFile = event.target.files[0];
         var reader = new FileReader();
 
-        var imgtag = document.getElementById("loadedImg");
+        var imgtag = document.getElementsByClassName("loadedImg");
         imgtag.title = selectedFile.name;
 
         reader.onload = function (event) {
+            console.log(loadedImgSrc);
             imgtag.src = event.target.result;
+            setLoadedImgSrc(event.target.result);
         };
 
         reader.readAsDataURL(selectedFile);
+
     }
 
     return (
@@ -105,67 +111,149 @@ function AddCourse() {
                     <Link to={'/courses'} className="">Back</Link>
                 </div>
                 <div className=''>
-                    <form onSubmit={handleImageUpload}>
-                        <div className="form-row">
-                            <label className="form-header">
-                                Course Name
-                            </label>
-                            <input
-                                name="title"
-                                type="text"
-                                className="form-input"
-                                onChange={handleInput}
-                            />
+                    <form className='form-add-course' onSubmit={handleImageUpload}>
+                        <div className='form-input-field'>
+                            <div className='left-side'>
+                                <div className="form-row">
+                                    <label className="form-header">
+                                        Course Name
+                                    </label>
+                                    <input
+                                        name="title"
+                                        type="text"
+                                        className="form-input"
+                                        onChange={handleInput}
+                                    />
+                                </div>
+                                <div className='form-row'>
+                                    <label className="form-header">
+                                        Description
+                                    </label>
+                                    <textarea
+                                        name="description"
+                                        rows={6}
+                                        className="form-input"
+                                        onChange={handleInput}
+                                        defaultValue={''}
+                                    />
+                                </div>
+                                <div className="form-row">
+                                    <label className="form-header">
+                                        Price
+                                    </label>
+                                    <input
+                                        name="price"
+                                        type="text"
+                                        className="form-input"
+                                        onChange={handleInput}
+                                    />
+                                </div>
+                                <div className="form-row">
+                                    <label className="form-header">
+                                        Image
+                                    </label>
+                                    <div className='file-wrapper'>
+                                        <label className="custom-file-upload">
+                                            <input
+                                                name="image"
+                                                type='file'
+                                                id='image'
+                                                className="form-input"
+                                                placeholder="www.example.com"
+                                                onChange={(e) => handleImage(e)}
+                                            />
+                                            <i className="fa fa-cloud-upload"></i> Image Upload
+                                        </label>
+                                    </div>
+                                </div>
+                                {/* <div className='form-image'>
+                                    <img src={loadedImgSrc} className="loadedImg" width="200px" />
+                                </div> */}
+                            </div>
+                            <div className='right-side'>
+                                <div className='CourseDetail'>
+                                    <section className='left-section'>
+                                        <h1 className='header'>{course.title}</h1>
+                                        <div className='description'>{course.description}</div>
+                                        <h1 className='header'>Course Content</h1>
+                                        <div className='content'>
+                                            <div className='content-item'>
+                                                <div className='lesson-name'>
+                                                    <i className="fa-solid fa-circle-play"></i>
+                                                    Lesson 1: Introduction
+                                                </div>
+                                                <div className='duration'>1:00</div>
+                                            </div>
+                                            <div className='content-item'>
+                                                <div className='lesson-name'>
+                                                    <i className="fa-solid fa-circle-play"></i>
+                                                    Lesson 2: Introduction
+                                                </div>
+                                                <div className='duration'>1:00</div>
+                                            </div>
+                                            <div className='content-item'>
+                                                <div className='lesson-name'>
+                                                    <i className="fa-solid fa-circle-play"></i>
+                                                    Lesson 2: Introduction
+                                                </div>
+                                                <div className='duration'>1:00</div>
+                                            </div>
+                                            <div className='content-item'>
+                                                <div className='lesson-name'>
+                                                    <i className="fa-solid fa-circle-play"></i>
+                                                    Lesson 2: Introduction
+                                                </div>
+                                                <div className='duration'>1:00</div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section className='right-section'>
+                                        <div className='course-box'>
+                                            <img src={loadedImgSrc} id="loadedImg" className="" width="200px" />
+                                            <Button className="learn-now-btn" onClick=''>Learn Now</Button>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
                         </div>
-                        <div className='form-row'>
-                            <label className="form-header">
-                                Description
-                            </label>
-                            <textarea
-                                name="description"
-                                rows={3}
-                                className="form-input"
-                                onChange={handleInput}
-                                defaultValue={''}
-                            />
+                        <div className='add-lesson'>
+                            <table>
+                                <colgroup>
+                                    <col span="1" style={{ width: "30%" }} />
+                                    <col span="1" style={{ width: "50%" }} />
+                                    <col span="1" style={{ width: "20%" }} />
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th>Lesson name</th>
+                                        <th>Lesson URL</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Python code</td>
+                                        <td>Example.com</td>
+                                        <td>Delete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Python code</td>
+                                        <td>Example.com</td>
+                                        <td>Delete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Python code</td>
+                                        <td>Example.com</td>
+                                        <td>Delete</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div className="form-row">
-                            <label className="form-header">
-                                Price
-                            </label>
-                            <input
-                                name="price"
-                                type="text"
-                                className="form-input"
-                                onChange={handleInput}
-                            />
-                        </div>
-                        <div className="form-row">
-                            <label className="form-header">
-                                Image
-                            </label>
-                            <label class="custom-file-upload">
-                                <input
-                                    name="image"
-                                    type='file'
-                                    id='image'
-                                    className="form-input"
-                                    placeholder="www.example.com"
-                                    onChange={(e) => handleImage(e)}
-                                />
-                                <i class="fa fa-cloud-upload"></i> Image Upload
-                            </label>
-                        </div>
-                        <div className='form-image'>
-                            <img src={course.image} id="loadedImg" className="img-fluid img-bordered" width="200px" />
-                        </div>
-                        <div className="">
+                        <div className="save-course">
                             <Button type="submit" className=''>Save Course</Button>
                         </div>
                     </form>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

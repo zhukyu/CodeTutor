@@ -1,14 +1,32 @@
-.add-course{
+.add-course {
     margin: 100px 50px;
     margin-bottom: 50px;
     height: 84vh;
-    padding: 20px 40px;
-    border-radius: 15px;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.add-course .form-input-field {
+    display: flex;
+
+}
+
+.add-course .form-input-field .left-side {
+    width: calc(100% / 3);
+}
+
+.add-course .form-input-field .right-side {
+    width: calc(100% * 2 / 3);
     box-shadow: 0 5px 20px rgba(159, 162, 177, 0.5);
+    margin-left: 30px;
+    height: 60vh;
+    overflow: auto;
 }
 
 .form-row {
-    margin: 5px 0;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-row * {
@@ -18,8 +36,13 @@
 .add-course .form-header {
     width: 150px;
     display: inline-block;
-    text-align: right;
-    margin-right: 10px;
+    line-height: 30px;
+}
+
+.add-course label {
+    font-size: 18px;
+    font-family: Source Sans Pro, sans-serif;
+    font-weight: 600;
 }
 
 .add-course input {
@@ -27,7 +50,9 @@
     border: 1px solid #bcbcbc;
     height: 30px;
     padding: 0 10px;
-    width: 200px;
+    width: 100%;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 18px;
 }
 
 .add-course textarea {
@@ -35,7 +60,13 @@
     border: 1px solid #bcbcbc;
     resize: none;
     padding: 5px 10px;
-    width: 200px;
+    width: 100%;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 18px;
+}
+
+.add-course .file-wrapper {
+    width: 100%;
 }
 
 .custom-file-upload {
@@ -44,7 +75,7 @@
     padding: 6px 12px;
     cursor: pointer;
     border-radius: 15px;
-    width: 200px;
+    width: 150;
 }
 
 .custom-file-upload input {
@@ -53,4 +84,35 @@
 
 .custom-file-upload i {
     color: #333;
+}
+
+.add-course .CourseDetail {
+    padding: 0 20px;
+    padding-top: 5px;
+    min-height: 0;
+    width: 100%;
+}
+
+.add-course img {
+    margin-top: 20px;
+}
+
+.add-course .add-lesson table {
+    margin: 50px 0 20px 0;
+    border-radius: 5px 5px 0 0;
+    border-collapse: separate;
+    width: 100%;
+    border-spacing: 0;
+}
+
+.add-course td, .add-course th {
+    border: 1px solid #bcbcbc;
+    padding: 5px;
+    text-align: left;
+}
+
+.add-course .save-course {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
 }

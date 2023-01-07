@@ -27,6 +27,7 @@
 .CourseDetail .description {
     font-family: Source Sans Pro, sans-serif;
     font-weight: 500;
+    word-wrap: break-word;
 }
 
 .CourseDetail .course-box {

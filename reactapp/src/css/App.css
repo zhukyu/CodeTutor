@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Source Sans Pro', sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -29,6 +32,10 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+*:focus {
+  outline-color: #57D9AC;
 }
 
 .App.disabled {

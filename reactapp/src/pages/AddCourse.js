@@ -12,14 +12,25 @@ import Footer from '../components/Footer'
 function AddCourse() {
     let imageUrl
 
-    const [loadedImgSrc, setLoadedImgSrc] = useState('https://www.studytienganh.vn/upload/2021/06/106292.jpg');
+    // const [loadedImgSrc, setLoadedImgSrc] = useState('https://www.studytienganh.vn/upload/2021/06/106292.jpg');
 
     const [course, setCourse] = useState({
-        title: 'Course Name',
-        description: 'Course description',
+        title: '',
+        description: '',
         price: '',
         image: '',
     })
+
+    const [courseDemo, setCourseDemo] = useState({
+        title: 'Course Name',
+        description: 'Course description',
+        price: '',
+        image: 'https://www.studytienganh.vn/upload/2021/06/106292.jpg',
+    })
+
+    const [lessons, setLessons] = useState([
+        { name: '', URL: '' }
+    ])
 
     const [percent, setPercent] = useState(0);
 
@@ -78,6 +89,34 @@ function AddCourse() {
             ...course,
             [e.target.name]: e.target.value
         });
+        if (e.target.value === '') {
+            setCourseDemo({
+                ...courseDemo,
+                [e.target.name]: e.target.placeholder
+            });
+        }
+        else {
+            setCourseDemo({
+                ...courseDemo,
+                [e.target.name]: e.target.value
+            });
+        }
+    }
+
+    const handleLessonInput = (index, e) => {
+        const values = [...lessons];
+        values[index][e.target.name] = e.target.value;
+        setLessons(values);
+    }
+
+    const handleAddLesson = () => {
+        setLessons([...lessons, { name: '', URL: '' }]);
+    }
+
+    const handleRemoveLesson = (index) => {
+        const values = [...lessons];
+        values.splice(index, 1);
+        setLessons(values);
     }
 
     const handleImage = (event) => {
@@ -93,14 +132,15 @@ function AddCourse() {
         imgtag.title = selectedFile.name;
 
         reader.onload = function (event) {
-            console.log(loadedImgSrc);
             imgtag.src = event.target.result;
-            setLoadedImgSrc(event.target.result);
+            setCourseDemo({ ...courseDemo, image: event.target.result })
         };
 
         reader.readAsDataURL(selectedFile);
 
     }
+
+
 
     return (
         <div>
@@ -123,6 +163,7 @@ function AddCourse() {
                                         type="text"
                                         className="form-input"
                                         onChange={handleInput}
+                                        placeholder="Course Name"
                                     />
                                 </div>
                                 <div className='form-row'>
@@ -135,6 +176,7 @@ function AddCourse() {
                                         className="form-input"
                                         onChange={handleInput}
                                         defaultValue={''}
+                                        placeholder="Course Description"
                                     />
                                 </div>
                                 <div className="form-row">
@@ -146,6 +188,7 @@ function AddCourse() {
                                         type="text"
                                         className="form-input"
                                         onChange={handleInput}
+                                        placeholder="Price"
                                     />
                                 </div>
                                 <div className="form-row">
@@ -173,43 +216,24 @@ function AddCourse() {
                             <div className='right-side'>
                                 <div className='CourseDetail'>
                                     <section className='left-section'>
-                                        <h1 className='header'>{course.title}</h1>
-                                        <div className='description'>{course.description}</div>
+                                        <h1 className='header'>{courseDemo.title}</h1>
+                                        <div className='description'>{courseDemo.description}</div>
                                         <h1 className='header'>Course Content</h1>
                                         <div className='content'>
-                                            <div className='content-item'>
-                                                <div className='lesson-name'>
-                                                    <i className="fa-solid fa-circle-play"></i>
-                                                    Lesson 1: Introduction
+                                            {lessons.map((lesson, index) => (
+                                                <div className='content-item' key={index}>
+                                                    <div className='lesson-name'>
+                                                        <i className="fa-solid fa-circle-play"></i>
+                                                        Lesson {index + 1}: {lesson.name}
+                                                    </div>
+                                                    <div className='duration'>1:00</div>
                                                 </div>
-                                                <div className='duration'>1:00</div>
-                                            </div>
-                                            <div className='content-item'>
-                                                <div className='lesson-name'>
-                                                    <i className="fa-solid fa-circle-play"></i>
-                                                    Lesson 2: Introduction
-                                                </div>
-                                                <div className='duration'>1:00</div>
-                                            </div>
-                                            <div className='content-item'>
-                                                <div className='lesson-name'>
-                                                    <i className="fa-solid fa-circle-play"></i>
-                                                    Lesson 2: Introduction
-                                                </div>
-                                                <div className='duration'>1:00</div>
-                                            </div>
-                                            <div className='content-item'>
-                                                <div className='lesson-name'>
-                                                    <i className="fa-solid fa-circle-play"></i>
-                                                    Lesson 2: Introduction
-                                                </div>
-                                                <div className='duration'>1:00</div>
-                                            </div>
+                                            ))}
                                         </div>
                                     </section>
                                     <section className='right-section'>
                                         <div className='course-box'>
-                                            <img src={loadedImgSrc} id="loadedImg" className="" width="200px" />
+                                            <img src={courseDemo.image} id="loadedImg" className="" width="200px" alt='' />
                                             <Button className="learn-now-btn" onClick=''>Learn Now</Button>
                                         </div>
                                     </section>
@@ -219,33 +243,53 @@ function AddCourse() {
                         <div className='add-lesson'>
                             <table>
                                 <colgroup>
-                                    <col span="1" style={{ width: "30%" }} />
+                                    <col span="1" style={{ width: "1%" }} />
+                                    <col span="1" style={{ width: "40%" }} />
                                     <col span="1" style={{ width: "50%" }} />
-                                    <col span="1" style={{ width: "20%" }} />
+                                    <col span="1" style={{ width: "9%" }} />
                                 </colgroup>
                                 <tbody>
                                     <tr>
+                                        <th>No.</th>
                                         <th>Lesson name</th>
                                         <th>Lesson URL</th>
                                         <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>Python code</td>
-                                        <td>Example.com</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Python code</td>
-                                        <td>Example.com</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Python code</td>
-                                        <td>Example.com</td>
-                                        <td>Delete</td>
-                                    </tr>
+                                    {lessons.map((lesson, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>
+                                                    {index + 1}
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        name='name'
+                                                        placeholder='Lesson Name'
+                                                        value={lesson.name}
+                                                        onChange={event => handleLessonInput(index, event)}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        name='URL'
+                                                        placeholder='Lesson URL'
+                                                        value={lesson.URL}
+                                                        onChange={event => handleLessonInput(index, event)}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <div className='delete-lesson' onClick={() => handleRemoveLesson(index)}>
+                                                        <i className="fa-solid fa-trash" ></i>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
+                        </div>
+                        <div className='add-lesson'>
+                            <Button className='btn-add-lesson' type="button" buttonStyle='btn--rounded' buttonSize='btn--small' onClick={handleAddLesson}>Add Lesson</Button>
                         </div>
                         <div className="save-course">
                             <Button type="submit" className=''>Save Course</Button>

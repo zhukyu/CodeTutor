@@ -1,7 +1,6 @@
 .add-course {
     margin: 100px 50px;
     margin-bottom: 50px;
-    height: 84vh;
     padding: 20px;
     min-height: 100vh;
 }
@@ -19,7 +18,7 @@
     width: calc(100% * 2 / 3);
     box-shadow: 0 5px 20px rgba(159, 162, 177, 0.5);
     margin-left: 30px;
-    height: 60vh;
+    height: 70vh;
     overflow: auto;
 }
 
@@ -106,13 +105,46 @@
 }
 
 .add-course td, .add-course th {
-    border: 1px solid #bcbcbc;
-    padding: 5px;
+    padding: 5px 15px;
     text-align: left;
+    
+}
+
+.add-course tr:nth-child(1) {
+    background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+    background-size: 200% auto;
+    color: white;
+}
+
+.add-course th {
+    line-height: 30px;
+}
+
+.add-course th:nth-child(1) {
+    border-radius: 15px 0 0 0;
+}
+
+.add-course th:nth-child(4) {
+    border-radius: 0 15px 0 0;
+}
+
+.add-course td {
+    line-height: 40px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.add-course .fa-trash {
+    color: #57D9AC;
+    cursor: pointer;
+}
+
+.add-course .add-lesson {
+    display: flex;
+    justify-content: center;
 }
 
 .add-course .save-course {
     display: flex;
     justify-content: flex-end;
-    padding: 20px;
+    padding: 20px 0;
 }

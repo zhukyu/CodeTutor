@@ -244,9 +244,9 @@ function AddCourse() {
                             <table>
                                 <colgroup>
                                     <col span="1" style={{ width: "1%" }} />
-                                    <col span="1" style={{ width: "40%" }} />
+                                    <col span="1" style={{ width: "46%" }} />
                                     <col span="1" style={{ width: "50%" }} />
-                                    <col span="1" style={{ width: "9%" }} />
+                                    <col span="1" style={{ width: "3%" }} />
                                 </colgroup>
                                 <tbody>
                                     <tr>

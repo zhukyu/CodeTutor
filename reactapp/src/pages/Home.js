@@ -124,7 +124,7 @@ function Home() {
                         <div className="wrap-banner-paragraph">
                             <div className="banner-paragraph">
                                 <div className="banner-header">CODE TUTOR: PLACE WHERE EVERYONE CAN BE CODER!</div>
-                                <div className="banner-description">Improve your development skills by taking courses from out best teachers. With Code Tutor, learning to code has never been easier!</div>
+                                <div className="banner-description">Improve your development skills by taking courses from our best teachers. With Code Tutor, learning to code has never been easier!</div>
                                 <Button className="learn-more-btn" onClick={(e) => { e.preventDefault(); window.location.replace("/#course-section") }}>Learn More</Button>
                             </div>
                         </div>

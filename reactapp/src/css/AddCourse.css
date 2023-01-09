@@ -18,7 +18,7 @@
     width: calc(100% * 2 / 3);
     box-shadow: 0 5px 20px rgba(159, 162, 177, 0.5);
     margin-left: 30px;
-    height: 70vh;
+    height: 65vh;
     overflow: auto;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .add-course .add-lesson table {
-    margin: 50px 0 20px 0;
+    margin: 70px 0 20px 0;
     border-radius: 5px 5px 0 0;
     border-collapse: separate;
     width: 100%;
@@ -133,9 +133,11 @@
     border-bottom: 1px solid rgba(0,0,0,.05);
 }
 
-.add-course .fa-trash {
+.add-course .delete-lesson {
     color: #57D9AC;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 
 .add-course .add-lesson {

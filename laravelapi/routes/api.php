@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CourseController;
+use App\Http\Controllers\API\LessonController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\UsersController;
 use Illuminate\Http\Request;
@@ -31,7 +32,12 @@ Route::group([
     Route::post('/add-product', [UsersController::class, 'store']);
     Route::post('/add-product', [ProductController::class, 'store']);
     Route::post('/add-course', [CourseController::class, 'store']);
+    Route::post('/add-lesson', [LessonController::class, 'store']);
+    Route::post('/add-lesson-multiple', [LessonController::class, 'storeMultiple']);
 });
 
 Route::get('/courses', [CourseController::class, 'index']);
 Route::get('/course/{id}', [CourseController::class, 'detail']);
+Route::get('/course/{id}/lessons', [LessonController::class, 'detail']);
+Route::get('/lessons', [LessonController::class, 'index']);
+

@@ -13,13 +13,19 @@ function CourseDetail() {
 
     const [course, setCourse] = useState(null);
 
+    const [lessons, setLessons] = useState([
+        { name: '', URL: '' }
+    ])
+
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
                 `/course/${course_id}`,
             );
-            console.log(result.data.data[0]);
-            setCourse(result.data.data[0]);
+            console.log(result.data.courses[0]);
+            console.log(result.data.lessons);
+            setCourse(result.data.courses[0]);
+            setLessons(result.data.lessons);
         };
 
         fetchData();
@@ -34,41 +40,15 @@ function CourseDetail() {
                     <div className='description'>{course.description}</div>
                     <h1 className='header'>Course Content</h1>
                     <div className='content'>
-                        <div className='content-item'>
-                            <div className='lesson-name'>
-                                <i class="fa-solid fa-circle-play"></i>
-                                Lesson 1: Introduction
+                        {lessons.map((lesson, index) => (
+                            <div className='content-item' key={index}>
+                                <div className='lesson-name'>
+                                    <i className="fa-solid fa-circle-play"></i>
+                                    Lesson {index + 1}: {lesson.name}
+                                </div>
+                                <div className='duration'>{lesson.duration.slice(3)}</div>
                             </div>
-                            <div className='duration'>1:00</div>
-                        </div>
-                        <div className='content-item'>
-                            <div className='lesson-name'>
-                                <i class="fa-solid fa-circle-play"></i>
-                                Lesson 2: Introduction
-                            </div>
-                            <div className='duration'>1:00</div>
-                        </div>
-                        <div className='content-item'>
-                            <div className='lesson-name'>
-                                <i class="fa-solid fa-circle-play"></i>
-                                Lesson 2: Introduction
-                            </div>
-                            <div className='duration'>1:00</div>
-                        </div>
-                        <div className='content-item'>
-                            <div className='lesson-name'>
-                                <i class="fa-solid fa-circle-play"></i>
-                                Lesson 2: Introduction
-                            </div>
-                            <div className='duration'>1:00</div>
-                        </div>
-                        <div className='content-item'>
-                            <div className='lesson-name'>
-                                <i class="fa-solid fa-circle-play"></i>
-                                Lesson 2: Introduction
-                            </div>
-                            <div className='duration'>1:00</div>
-                        </div>
+                        ))}
                     </div>
                 </section>
                 <section className='right-section'>
@@ -77,22 +57,22 @@ function CourseDetail() {
                         <Button className="learn-now-btn" onClick=''>Learn Now</Button>
                     </div>
                 </section>
-            </div> : 
-            <div>
-                <LoadingScreen
-                    loading={true}
-                    bgColor="rgba(0, 0, 0, 0.2)"
-                    spinnerColor="#84fab0"
-                    textColor="#676767"
-                    logoSrc=""
-                    text=""
-                >
-                </LoadingScreen>
-                <div style={{ height: "100vh"}}></div>
-            </div>
+            </div> :
+                <div>
+                    <LoadingScreen
+                        loading={true}
+                        bgColor="rgba(0, 0, 0, 0.2)"
+                        spinnerColor="#84fab0"
+                        textColor="#676767"
+                        logoSrc=""
+                        text=""
+                    >
+                    </LoadingScreen>
+                    <div style={{ height: "100vh" }}></div>
+                </div>
             }
 
-            <Footer/>
+            <Footer />
 
         </div>
     )

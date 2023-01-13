@@ -21,6 +21,7 @@ function AddCourse() {
         image: '',
     })
 
+
     const [courseDemo, setCourseDemo] = useState({
         title: 'Course Name',
         description: 'Course description',
@@ -33,6 +34,23 @@ function AddCourse() {
     ])
 
     const [percent, setPercent] = useState(0);
+
+    const saveLesson = async (courseID) => {
+        let data = {
+            course_id: courseID,
+            lessons: lessons
+        }
+
+        const res = await axios.post('/auth/add-lesson-multiple', data)
+            .then((res) => {
+                if (res.data.status === 200) {
+                    console.log(res.data);
+                }
+                else {
+                    console.log(res.data);
+                }
+            })
+    }
 
     const saveCourse = async () => {
         console.log(course);
@@ -47,7 +65,8 @@ function AddCourse() {
         const res = await axios.post('/auth/add-course', data)
             .then((res) => {
                 if (res.data.status === 200) {
-                    console.log(res.data);
+                    console.log(res.data.course_id)
+                    saveLesson(res.data.course_id)
                 }
                 else {
                     console.log(res);
@@ -107,6 +126,7 @@ function AddCourse() {
         const values = [...lessons];
         values[index][e.target.name] = e.target.value;
         setLessons(values);
+        console.log(lessons);
     }
 
     const handleAddLesson = () => {
@@ -234,7 +254,7 @@ function AddCourse() {
                                     <section className='right-section'>
                                         <div className='course-box'>
                                             <img src={courseDemo.image} id="loadedImg" className="" width="200px" alt='' />
-                                            <Button className="learn-now-btn" onClick=''>Learn Now</Button>
+                                            <Button type='button' className="learn-now-btn">Learn Now</Button>
                                         </div>
                                     </section>
                                 </div>

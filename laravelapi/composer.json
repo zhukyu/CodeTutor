@@ -7,11 +7,14 @@
     "require": {
         "php": "^8.0.2",
         "fruitcake/laravel-cors": "^3.0",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.5",
+        "james-heinrich/getid3": "^1.9",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
+        "pbmedia/laravel-ffmpeg": "^8.2",
+        "php-ffmpeg/php-ffmpeg": "^1.1",
         "php-open-source-saver/jwt-auth": "^2.0"
     },
     "require-dev": {

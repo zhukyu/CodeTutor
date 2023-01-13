@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Lcobucci\JWT\Token;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -30,18 +31,33 @@ class CourseController extends Controller
             ->select('course.*', 'users.name')
             ->where('course.id', $id)
             ->get();
+        $lessons = DB::table('lessons')
+            ->where('course_id', $id)
+            ->get();
         return response()->json([
             'status' => 200,
-            'data' => $courses,
+            'courses' => $courses,
+            'lessons' => $lessons,
         ]);
     }
 
     public function store(Request $request)
     {
-
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'price' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'message' => $validator->errors(),
+            ]);
+        }
 
         $user_id = auth()->user()->id;
-
 
         $course = new Course;
         $course->title = $request->title;
@@ -54,6 +70,7 @@ class CourseController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Course created successfully',
+            'course_id' => $course->id,
         ]);
     }
 }

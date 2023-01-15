@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Button } from '../components/Button';
 import Navbar from '../components/Navbar/Navbar'
 import '../css/CourseDetail.css'
@@ -19,6 +19,7 @@ function CourseDetail() {
 
     useEffect(() => {
         const fetchData = async () => {
+            window.scrollTo(0, 0);
             const result = await axios(
                 `/course/${course_id}`,
             );
@@ -54,7 +55,9 @@ function CourseDetail() {
                 <section className='right-section'>
                     <div className='course-box'>
                         <img src={course.image} alt=''></img>
-                        <Button className="learn-now-btn" onClick=''>Learn Now</Button>
+                        <Link to={`/learning/${course.id}`} className="learn-now-btn">
+                            <Button  >Learn Now</Button>
+                        </Link>
                     </div>
                 </section>
             </div> :

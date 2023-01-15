@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 function Courses() {
     const [courses, setCourses] = useState(null);
     useEffect(() => {
+        window.scrollTo(0, 0);
         document.querySelector('.NavbarItems').classList.add('scrolled');
     });
     useEffect(() => {

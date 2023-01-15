@@ -8,6 +8,7 @@ import Courses from './pages/Courses';
 import Blogs from './pages/Blogs';
 import AddCourse from './pages/AddCourse';
 import CourseDetail from './pages/CourseDetail';
+import Learning from './pages/Learning';
 
 function App() {
 
@@ -41,6 +42,12 @@ function App() {
         <Route path="course/:id" element={
           <DefaultLayout>
             <CourseDetail />
+          </DefaultLayout>
+        }
+        />
+        <Route path="learning/:id" element={
+          <DefaultLayout>
+            <Learning />
           </DefaultLayout>
         }
         />

@@ -33,7 +33,6 @@ class LessonController extends Controller
         unlink($tempFile);
 
         return $duration;
-
     }
 
     public function index()
@@ -50,8 +49,13 @@ class LessonController extends Controller
         $lessons = DB::table('lessons')
             ->where('lessons.course_id', $courseId)
             ->get();
+        $title = DB::table('course')
+            ->select('course.title')
+            ->where('course.id', $courseId)
+            ->get();
         return response()->json([
             'status' => 200,
+            'title' => $title,
             'data' => $lessons,
         ]);
     }
@@ -76,7 +80,7 @@ class LessonController extends Controller
         $lesson->name = $request->name;
         $lesson->URL = $request->URL;
         $durasi = $this->getDuration($lesson->URL);
-        $lesson->duration = date('H:i:s', strtotime('00:'.$durasi));
+        $lesson->duration = date('H:i:s', strtotime('00:' . $durasi));
         $lesson->save();
         return response()->json([
             'status' => 200,
@@ -100,8 +104,8 @@ class LessonController extends Controller
         }
         $course_id = $request->course_id;
         $lessons = $request->lessons;
-        foreach($lessons as $lesson) {
-            
+        foreach ($lessons as $lesson) {
+
             $validator = Validator::make($lesson, [
                 'name' => 'required',
                 'URL' => 'required',
@@ -112,13 +116,13 @@ class LessonController extends Controller
                     'message' => $validator->errors(),
                 ]);
             }
-            
+
             $temp = new Lesson();
             $temp->course_id = $course_id;
             $temp->name = $lesson['name'];
             $temp->URL = $lesson['URL'];
             $durasi = $this->getDuration($lesson['URL']);
-            $temp->duration = date('H:i:s', strtotime('00:'.$durasi));
+            $temp->duration = date('H:i:s', strtotime('00:' . $durasi));
             $temp->save();
         }
         return response()->json([

@@ -64,3 +64,8 @@
     color: #57D9AC;
     margin-right: 10px;
 }
+
+.learn-now-btn {
+    display: flex;
+    text-decoration: none;
+}

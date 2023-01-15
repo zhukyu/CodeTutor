@@ -1,0 +1,104 @@
+.Learning {
+    padding-top: 50px;
+    margin: 0 auto;
+    display: flex;
+    height: 100vh;
+
+    --plyr-color-main: var(--main-color);
+}
+
+.nav-learning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #333;
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    display: flex;
+}
+
+.nav-learning .back-btn {
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-learning .back-btn:hover {
+    background-color: rgb(42, 42, 42);
+    transition: all 0.2s;
+}
+
+.back-btn i {
+    color: #fff;
+}
+
+.nav-learning .logo-icon {
+    width: 30px;
+}
+
+.nav-learning .course-title {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.Learning .left-section {
+    width: calc(100% * 3 / 4);
+    overflow: auto;
+}
+
+.plyr-video {
+    width: 100%;
+    height: 50%;
+}
+
+.Learning .right-section {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% / 4);
+}
+
+.Learning .right-section .course-content {
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.Learning .right-section .lessons-list{
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.Learning .right-section .lesson {
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 1px solid #eee;
+}
+
+.Learning .right-section .lesson:hover {
+    background-color: #eee;
+}
+
+.Learning .right-section .lesson.selected {
+    background-color: #C7F2E3;
+}
+
+.Learning .right-section .lesson-title {
+    margin-bottom: 5px;
+}
+
+.Learning .right-section .fa-circle-play{
+    color: #57D9AC;
+    margin-right: 10px;
+}

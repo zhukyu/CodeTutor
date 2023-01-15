@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar';
 
 function Blogs() {
     useEffect (() => {
+        window.scrollTo(0, 0);
         document.querySelector('.NavbarItems').classList.add('scrolled');
     });
     return (

@@ -33,7 +33,7 @@ function Courses() {
                     <div className="wrap-header">
                         <span className="header">Features Courses</span>
                         <Link to={'/add-course'} className="">
-                            <Button className="learn-now-btn" onClick=''>Add Course</Button>
+                            <Button className="" onClick=''>Add Course</Button>
                         </Link>
                     </div>
                     <div className="row">

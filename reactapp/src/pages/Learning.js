@@ -30,8 +30,8 @@ function Learning() {
             );
             setLessons(result.data.data);
             setTitle(result.data.title[0].title);
+            document.title = result.data.title[0].title;
         };
-
         fetchData();
     }, [])
 
@@ -63,38 +63,40 @@ function Learning() {
             </div>
             {lessons ? <div className='Learning'>
                 <div className='left-section'>
-                    <div className='video' >
-                        <Plyr
-                            ref={playerRef}
-                            type="video"
-                            source={{ type: 'video', sources: [{ src: lessons[current].URL, type: 'video/mp4' }] }}
-                            options={{
-                                controls: [
-                                    'play-large', // The large play button in the center
-                                    'rewind', // Rewind by the seek time (default 10 seconds)
-                                    'play', // Play/pause playback
-                                    'fast-forward', // Fast forward by the seek time (default 10 seconds)
-                                    'progress', // The progress bar and scrubber for playback and buffering
-                                    'current-time', // The current time of playback
-                                    'duration', // The full duration of the media
-                                    'mute', // Toggle mute
-                                    'volume', // Volume control
-                                    'captions', // Toggle captions
-                                    'settings', // Settings menu
-                                    'pip', // Picture-in-picture (currently Safari only)
-                                    'fullscreen', // Toggle fullscreen
-                                ],
-                            }}
+                    <div className='video-wrapper'>
+                        <div className='video' >
+                            <Plyr
+                                ref={playerRef}
+                                type="video"
+                                source={{ type: 'video', sources: [{ src: lessons[current].URL, type: 'video/mp4' }] }}
+                                options={{
+                                    controls: [
+                                        'play-large', // The large play button in the center
+                                        'rewind', // Rewind by the seek time (default 10 seconds)
+                                        'play', // Play/pause playback
+                                        'fast-forward', // Fast forward by the seek time (default 10 seconds)
+                                        'progress', // The progress bar and scrubber for playback and buffering
+                                        'current-time', // The current time of playback
+                                        'duration', // The full duration of the media
+                                        'mute', // Toggle mute
+                                        'volume', // Volume control
+                                        'captions', // Toggle captions
+                                        'settings', // Settings menu
+                                        'pip', // Picture-in-picture (currently Safari only)
+                                        'fullscreen', // Toggle fullscreen
+                                    ],
+                                }}
 
-                            onPlay={() => console.log('The video has started playing')}
-                        />
-                        {/* <button onClick={() => {
+                                onPlay={() => console.log('The video has started playing')}
+                            />
+                            {/* <button onClick={() => {
                             console.log(playerRef.current)
                             playerRef.current.plyr.play();
                         }}>Play</button>
                         <p>{duration}</p> */}
-                        <h2>{title}</h2>
+                        </div>
                     </div>
+                    <h2>{title}</h2>
                 </div>
                 <div className='right-section'>
                     <div className='course-content'>

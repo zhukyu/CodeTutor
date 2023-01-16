@@ -41,7 +41,7 @@ function AddCourse() {
             lessons: lessons
         }
 
-        const res = await axios.post('/auth/add-lesson-multiple', data)
+        const res = await axios.post('/admin/add-lesson-multiple', data)
             .then((res) => {
                 if (res.data.status === 200) {
                     console.log(res.data);
@@ -62,14 +62,14 @@ function AddCourse() {
         data.append('image', imageUrl);
         data.append('price', course.price);
 
-        const res = await axios.post('/auth/add-course', data)
+        const res = await axios.post('/admin/add-course', data)
             .then((res) => {
                 if (res.data.status === 200) {
                     console.log(res.data.course_id)
                     saveLesson(res.data.course_id)
                 }
                 else {
-                    console.log(res);
+                    console.log(res.data);
                 }
             })
             .catch((e) => {
@@ -254,7 +254,9 @@ function AddCourse() {
                                     <section className='right-section'>
                                         <div className='course-box'>
                                             <img src={courseDemo.image} id="loadedImg" className="" width="200px" alt='' />
-                                            <Button type='button' className="learn-now-btn">Learn Now</Button>
+                                            <div className='learn-now-btn'>
+                                                <Button type='button' className="">Learn Now</Button>
+                                            </div>
                                         </div>
                                     </section>
                                 </div>

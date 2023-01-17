@@ -19,11 +19,19 @@ This website is designed to provide a comprehensive learning experience for anyo
 - Connect with other learners and get help from experienced developers on the community forum.
 - Check your progress on your dashboard and access your course materials at any time.
 
+## Installation
+1. Clone the repository: `git clone https://github.com/zhukyu/CodeTutor.git`
+2. Install the dependencies: `npm install` or `yarn install`
+3. Start the development server: `npm start` or `yarn start`
+4. Build the production version: `npm run build` or `yarn build`
+
 ## Requirements:
+- Node.js
+- npm or yarn
 - A modern web browser such as Google Chrome, Firefox, or Safari.
 - A stable internet connection.
 
 ## Support:
-If you have any questions or run into any issues while using the website, please reach out to us at phamtienhuu562002@gmail.com. We're always happy to help!
+If you have any questions or run into any issues while using the website, please reach out to us at support@codetutor.com. We're always happy to help!
 
 Thank you for choosing **CodeTutor**. We hope you enjoy learning and growing as a developer with us!

@@ -1,5 +1,5 @@
 import './css/App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Home from './pages/Home';
 import Http from './components/Http';
@@ -9,6 +9,13 @@ import Blogs from './pages/Blogs';
 import AddCourse from './pages/AddCourse';
 import CourseDetail from './pages/CourseDetail';
 import Learning from './pages/Learning';
+
+const AdminRoute = ({ element, ...rest }) => {
+  if (localStorage.getItem('role') !== 'admin') {
+    return <Navigate to="/" replace />;
+  }
+  return element
+}
 
 function App() {
 
@@ -33,12 +40,6 @@ function App() {
           </DefaultLayout>
         }
         />
-        <Route path="add-course" element={
-          <DefaultLayout>
-            <AddCourse />
-          </DefaultLayout>
-        }
-        />
         <Route path="course/:id" element={
           <DefaultLayout>
             <CourseDetail />
@@ -50,6 +51,22 @@ function App() {
             <Learning />
           </DefaultLayout>
         }
+        />
+        {/* admin route */}
+        <Route path="add-course" element={
+          <AdminRoute
+            element={
+              <DefaultLayout>
+                <AddCourse />
+              </DefaultLayout>
+            }
+          />
+        }
+        />
+        {/* other route */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
         />
       </Routes>
     </Router>

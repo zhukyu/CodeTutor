@@ -45,6 +45,8 @@ function ProfileMenu() {
             {
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('user_name');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('role');
                 navigate(0);
             }
         });

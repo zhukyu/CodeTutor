@@ -11,16 +11,12 @@ import Footer from '../components/Footer'
 
 function AddCourse() {
     let imageUrl
-
-    // const [loadedImgSrc, setLoadedImgSrc] = useState('https://www.studytienganh.vn/upload/2021/06/106292.jpg');
-
     const [course, setCourse] = useState({
         title: '',
         description: '',
         price: '',
         image: '',
     })
-
 
     const [courseDemo, setCourseDemo] = useState({
         title: 'Course Name',
@@ -164,11 +160,10 @@ function AddCourse() {
 
     return (
         <div>
-            <Navbar current={1} />
+            <Navbar current={1} back={'/courses'}/>
             <div className="add-course">
                 <div className="">
                     <h4 className='header'>Add Course</h4>
-                    <Link to={'/courses'} className="">Back</Link>
                 </div>
                 <div className=''>
                     <form className='form-add-course' onSubmit={handleImageUpload}>
@@ -229,9 +224,6 @@ function AddCourse() {
                                         </label>
                                     </div>
                                 </div>
-                                {/* <div className='form-image'>
-                                    <img src={loadedImgSrc} className="loadedImg" width="200px" />
-                                </div> */}
                             </div>
                             <div className='right-side'>
                                 <div className='CourseDetail'>

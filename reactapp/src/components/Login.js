@@ -32,6 +32,7 @@ function Login(props) {
                     localStorage.setItem('access_token', res.data.access_token);
                     localStorage.setItem('user_name', res.data.user.name);
                     localStorage.setItem('user_id', res.data.user.id);
+                    localStorage.setItem('role', res.data.user.role);
                     navigate(0);
                 }
             })

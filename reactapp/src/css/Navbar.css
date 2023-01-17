@@ -38,7 +38,7 @@
     text-decoration: none;
 }
 
-.NavbarItems.scrolled>.logo {
+.NavbarItems.scrolled .logo {
     margin-left: 10px;
 }
 
@@ -56,12 +56,32 @@
     font-family: cursive;
 }
 
-.NavbarItems.scrolled>.logo>.logo-icon {
+.NavbarItems.scrolled .logo .logo-icon {
     width: 40px;
 }
 
-.NavbarItems.scrolled>.logo>.logo-title {
+.NavbarItems.scrolled .logo .logo-title {
     font-size: 1.2rem;
+}
+
+.NavbarItems .back-btn {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: #808990;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.NavbarItems .back-btn:hover i{
+    transform: translateX(-3px);
+    transition: 0.2s ease-in;
+}
+
+.NavbarItems .back-btn i {
+    margin-right: 5px;
+    color: #808990;
 }
 
 .nav-menu {

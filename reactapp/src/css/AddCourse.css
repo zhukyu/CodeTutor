@@ -1,7 +1,5 @@
 .add-course {
-    margin: 100px 50px;
-    margin-bottom: 50px;
-    padding: 20px;
+    padding: 100px 80px;
     min-height: 100vh;
 }
 
@@ -134,7 +132,7 @@
 }
 
 .add-course .delete-lesson {
-    color: #57D9AC;
+    color: #EE490D;
     cursor: pointer;
     display: flex;
     justify-content: center;

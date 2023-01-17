@@ -32,9 +32,9 @@ function Courses() {
                 <div className="course-section" id="course-section">
                     <div className="wrap-header">
                         <span className="header">Features Courses</span>
-                        <Link to={'/add-course'} className="">
+                        {localStorage.getItem('role') === 'admin' ? <Link to={'/add-course'} className="">
                             <Button className="" onClick=''>Add Course</Button>
-                        </Link>
+                        </Link> : ''}
                     </div>
                     <div className="row">
                         {courses.map((item, index) => {

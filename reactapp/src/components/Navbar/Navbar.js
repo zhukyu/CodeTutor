@@ -12,6 +12,12 @@ import ProfileMenu from './ProfileMenu'
 async function fetchData(setData) {
     try {
         const result = await axios.get("/auth/user-profile")
+        if (result.status === 401) {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('user_name');
+            localStorage.removeItem('user_id');
+            localStorage.removeItem('role');
+        }
         setData(result);
     } catch (error) {
         console.error(error);
@@ -19,7 +25,6 @@ async function fetchData(setData) {
 }
 
 function Navbar(props) {
-
 
     const [clicked, setClicked] = useState(false);
     const [popup, setPopup] = useState(false);
@@ -73,29 +78,17 @@ function Navbar(props) {
         element.classList.add('is-active');
     }
 
-    // useEffect(() => {
-    //     const handleScroll = event => {
-    //         if (window.scrollY > 60) {
-    //             document.querySelector('.NavbarItems').classList.add('scrolled');
-    //         }
-    //         else {
-    //             document.querySelector('.NavbarItems').classList.remove('scrolled');
-    //         }
-    //     };
-
-    //     window.addEventListener('scroll', handleScroll);
-
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // });
-
     return (
         <div className="Navbar">
             <nav className={"NavbarItems scrolled"}>
                 <Link to='/' className="logo">
                     <img className="logo-icon" src={logo} alt="logo" />
-                    <h1 className="logo-title">Code Tutor</h1>
+                    {props.back ?
+                        <Link to={props.back} className='back-btn' title='Back'>
+                            <i className="fa-solid fa-angle-left"></i>
+                            <span>Back</span>
+                        </Link>
+                        : <h1 className="logo-title">Code Tutor</h1>}
                 </Link>
                 <Searchbar />
                 <div className={clicked ? "nav-menu-mask is-active" : "nav-menu-mask"} onClick={handleNavMenuPopup}>

@@ -23,8 +23,6 @@ function CourseDetail() {
             const result = await axios(
                 `/course/${course_id}`,
             );
-            console.log(result.data.courses[0]);
-            console.log(result.data.lessons);
             setCourse(result.data.courses[0]);
             setLessons(result.data.lessons);
         };

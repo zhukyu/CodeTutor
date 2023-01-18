@@ -6,16 +6,19 @@ import Navbar from '../components/Navbar/Navbar'
 import '../css/CourseDetail.css'
 import LoadingScreen from "react-loading-screen"
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleState } from '../utility/actions';
 
 function CourseDetail() {
     const params = useParams();
     const course_id = params.id;
 
     const [course, setCourse] = useState(null);
-
     const [lessons, setLessons] = useState([
         { name: '', URL: '' }
     ])
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,6 +32,12 @@ function CourseDetail() {
 
         fetchData();
     }, [course_id])
+
+    const handleLoginPopup = (e) => {
+        dispatch(toggleState());
+        var item = document.querySelector('.popup-login');
+        item.classList.add('is-active');
+    }
 
     return (
         <div>
@@ -53,9 +62,13 @@ function CourseDetail() {
                 <section className='right-section'>
                     <div className='course-box'>
                         <img src={course.image} alt=''></img>
-                        <Link to={`/learning/${course.id}`} className="learn-now-btn">
-                            <Button  >Learn Now</Button>
-                        </Link>
+                        {localStorage.getItem('access_token') ?
+                            <Link to={`/learning/${course.id}`} className="learn-now-btn">
+                                <Button>Learn Now</Button>
+                            </Link>
+                            : <div className="learn-now-btn" onClick={handleLoginPopup}>
+                                <Button>Learn Now</Button>
+                            </div>}
                     </div>
                 </section>
             </div> :
@@ -72,9 +85,7 @@ function CourseDetail() {
                     <div style={{ height: "100vh" }}></div>
                 </div>
             }
-
             <Footer />
-
         </div>
     )
 }

@@ -124,7 +124,7 @@
 }
 
 .wrap-signIn-avatar {
-    width: 130px !important;
+    /* width: 130px !important; */
 }
 
 .container-signIn {
@@ -262,6 +262,15 @@
 @media (max-width: 640px) {
     .logo-title {
         transition: all 0.5s;
+        display: none;
+    }
+    .NavbarItems {
+        gap: 20px;
+    }
+    .NavbarItems .back-btn {
+        padding: 0;
+    }
+    .NavbarItems .back-btn span {
         display: none;
     }
 }

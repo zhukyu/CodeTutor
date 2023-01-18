@@ -8,6 +8,8 @@ import axios from 'axios';
 import Login from '../Login';
 import Searchbar from './Searchbar';
 import ProfileMenu from './ProfileMenu'
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleState } from '../../utility/actions';
 
 async function fetchData(setData) {
     try {
@@ -27,8 +29,13 @@ async function fetchData(setData) {
 function Navbar(props) {
 
     const [clicked, setClicked] = useState(false);
-    const [popup, setPopup] = useState(false);
+    const popup = useSelector(state => state.isTrue)
+    const dispatch = useDispatch();
     const [data, setData] = useState(null);
+
+    const handleToggleState = () => {
+        dispatch(toggleState());
+    }
 
     useEffect(() => {
         fetchData(setData);
@@ -57,7 +64,7 @@ function Navbar(props) {
 
     const handleLoginPopup = (e) => {
         if (e.target === e.currentTarget) {
-            setPopup(!popup)
+            handleToggleState();
             var item = document.querySelector('.popup-login');
             if (!popup) {
                 item.classList.add('is-active');

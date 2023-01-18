@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import storage from '../components/firebaseConfig'
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
@@ -30,6 +30,19 @@ function AddCourse() {
     ])
 
     const [percent, setPercent] = useState(0);
+
+    const [fullFilled, setFullFilled] = useState(false);
+
+    useEffect(() => {
+        if (Object.values(course).every(course => course !== '') &&
+        lessons.map(lesson => Object.values(lesson).every(val => val !== '')).every(val => val)) {
+            setFullFilled(true)
+        }
+        else {
+            setFullFilled(false)
+        }
+    }, [lessons, course])
+
 
     const saveLesson = async (courseID) => {
         let data = {
@@ -160,7 +173,7 @@ function AddCourse() {
 
     return (
         <div>
-            <Navbar current={1} back={'/courses'}/>
+            <Navbar current={1} back={'/courses'} />
             <div className="add-course">
                 <div className="">
                     <h4 className='header'>Add Course</h4>
@@ -292,7 +305,10 @@ function AddCourse() {
                                                     />
                                                 </td>
                                                 <td>
-                                                    <div className='delete-lesson' onClick={() => handleRemoveLesson(index)}>
+                                                    <div className='delete-lesson'
+                                                        onClick={() => handleRemoveLesson(index)}
+                                                        style={{ pointerEvents: lessons.length === 1 ? "none" : "auto", opacity: lessons.length === 1 ? 0.4 : 1 }}
+                                                    >
                                                         <i className="fa-solid fa-trash" ></i>
                                                     </div>
                                                 </td>
@@ -306,13 +322,17 @@ function AddCourse() {
                             <Button className='btn-add-lesson' type="button" buttonStyle='btn--rounded' buttonSize='btn--small' onClick={handleAddLesson}>Add Lesson</Button>
                         </div>
                         <div className="save-course">
-                            <Button type="submit" className=''>Save Course</Button>
+                            <Button
+                                type="submit"
+                                className='save-course-btn'
+                                disabled={!fullFilled}
+                            >Save Course</Button>
                         </div>
                     </form>
                 </div>
-            </div>
+            </div >
             <Footer />
-        </div>
+        </div >
     )
 }
 

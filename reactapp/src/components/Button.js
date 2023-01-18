@@ -13,14 +13,15 @@ const SIZES = [
     'btn--small',
 ]
 
-export const Button = ({ 
+export const Button = ({
     className,
     id,
-    children, 
-    type, 
-    onClick, 
-    buttonStyle, 
-    buttonSize 
+    children,
+    type,
+    onClick,
+    buttonStyle,
+    buttonSize,
+    disabled
 }) => {
     const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0]
 
@@ -31,7 +32,14 @@ export const Button = ({
     const checkClassName = className ? className : ''
 
     return (
-        <button className={`btn ${checkButtonStyle} ${checkButtonSize} ${checkClassName}`} id={checkId} onClick={onClick} type={type}>
+        <button
+            className={`btn ${checkButtonStyle} ${checkButtonSize} ${checkClassName}`}
+            id={checkId}
+            onClick={onClick}
+            type={type}
+            disabled={disabled}
+            style={{ pointerEvents: disabled ? "none" : "auto", opacity: disabled ? 0.6 : 1 }}
+            >
             {children}
         </button>
     )

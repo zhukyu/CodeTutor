@@ -8,6 +8,7 @@ import axios from 'axios'
 import Navbar from '../components/Navbar/Navbar'
 import { Button } from '../components/Button'
 import Footer from '../components/Footer'
+import Swal from 'sweetalert2'
 
 function AddCourse() {
     let imageUrl
@@ -54,6 +55,13 @@ function AddCourse() {
             .then((res) => {
                 if (res.data.status === 200) {
                     console.log(res.data);
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Course added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Huray!',
+                        confirmButtonColor: '#57D9AC',
+                    })
                 }
                 else {
                     console.log(res.data);

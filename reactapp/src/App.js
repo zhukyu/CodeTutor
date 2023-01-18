@@ -19,6 +19,13 @@ const AdminRoute = ({ element, ...rest }) => {
   return element
 }
 
+const AuthRoute = ({ element, ...rest }) => {
+  if (localStorage.getItem('access_token') === null) {
+    return <Navigate to="/" replace />;
+  }
+  return element
+}
+
 function App() {
 
   return (
@@ -49,18 +56,23 @@ function App() {
             </DefaultLayout>
           }
           />
-          <Route path="learning/:id" element={
-            <DefaultLayout>
-              <Learning />
-            </DefaultLayout>
-          }
-          />
           {/* admin route */}
           <Route path="add-course" element={
             <AdminRoute
               element={
                 <DefaultLayout>
                   <AddCourse />
+                </DefaultLayout>
+              }
+            />
+          }
+          />
+          {/* auth route */}
+          <Route path="learning/:id" element={
+            <AuthRoute
+              element={
+                <DefaultLayout>
+                  <Learning />
                 </DefaultLayout>
               }
             />

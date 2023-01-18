@@ -7,8 +7,10 @@ import '../css/Learning.css'
 import LoadingScreen from "react-loading-screen"
 import Footer from '../components/Footer';
 import logo from '../logo.svg';
-import Plyr from "plyr-react"
 import "plyr-react/plyr.css"
+import Plyr, { usePlyr } from "plyr-react"
+import CustomVideoPlyr from '../components/CustomVideoPlyr';
+import Swal from 'sweetalert2';
 
 function Learning() {
 
@@ -19,7 +21,7 @@ function Learning() {
 
     const [title, setTitle] = useState('');
     const [lessons, setLessons] = useState(null);
-    const [duration, setDuration] = useState(0);
+    const [seek, setSeek] = useState(0);
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {
@@ -27,10 +29,11 @@ function Learning() {
             window.scrollTo(0, 0);
             const result = await axios(
                 `/course/${course_id}/lessons`,
-            );
-            setLessons(result.data.data);
-            setTitle(result.data.title[0].title);
-            document.title = result.data.title[0].title;
+            ).then(res => {
+                setLessons(res.data.data);
+                setTitle(res.data.title[0].title);
+                document.title = res.data.title[0].title;
+            })
         };
         fetchData();
     }, [])
@@ -48,6 +51,47 @@ function Learning() {
             setCurrent(index);
         }
     }
+
+    useEffect(() => {
+        const player = document.querySelector('video')
+        if (player) {
+            let previousTime = 0;
+            let currentTime = 0;
+            let seekStart = null;
+            player.addEventListener('ended', () => {
+                console.log('ended', player.currentTime);
+            })
+            player.addEventListener('timeupdate', function () {
+                previousTime = currentTime;
+                currentTime = player.currentTime;
+            });
+            player.addEventListener('seeking', function () {
+                if (seekStart === null) {
+                    seekStart = previousTime;
+                }
+            });
+            player.addEventListener('seeked', function () {
+                if (currentTime - seekStart > 60) {
+                    player.pause()
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Learning too fast! Slow down!',
+                        icon: 'warning',
+                        confirmButtonText: 'Okay',
+                        confirmButtonColor: '#57D9AC',
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            player.play();
+                        }
+                    })
+                    player.currentTime = seekStart;
+                }
+                seekStart = null;
+            });
+        }
+    },)
+
+
     return (
         <div>
             <div className='nav-learning'>
@@ -65,7 +109,8 @@ function Learning() {
                 <div className='left-section'>
                     <div className='video-wrapper'>
                         <div className='video' >
-                            <Plyr
+                            {/* <video ref={raptorRef} className="plyr-react plyr" id='plyr' /> */}
+                            <CustomVideoPlyr
                                 ref={playerRef}
                                 type="video"
                                 source={{ type: 'video', sources: [{ src: lessons[current].URL, type: 'video/mp4' }] }}
@@ -86,14 +131,7 @@ function Learning() {
                                         'fullscreen', // Toggle fullscreen
                                     ],
                                 }}
-
-                                onPlay={() => console.log('The video has started playing')}
                             />
-                            {/* <button onClick={() => {
-                            console.log(playerRef.current)
-                            playerRef.current.plyr.play();
-                        }}>Play</button>
-                        <p>{duration}</p> */}
                         </div>
                     </div>
                     <h2>{title}</h2>
@@ -105,7 +143,7 @@ function Learning() {
                     <div className='lessons-list'>
                         {lessons.map((lesson, index) => {
                             return (
-                                <div className='lesson' key={index} onClick={(e) => handleLesson(e, index)}>
+                                <div className={index === 0 ? 'lesson selected' : 'lesson'} key={index} onClick={(e) => handleLesson(e, index)}>
                                     <h4 className='lesson-title'>{`Lesson ${index + 1}: ${lesson.name}`}</h4>
                                     <p ><i className="fa-solid fa-circle-play" ></i> {lesson.duration.slice(3)}</p>
                                 </div>

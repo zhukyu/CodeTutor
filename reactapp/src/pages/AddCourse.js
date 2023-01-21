@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import storage from '../components/firebaseConfig'
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import '../css/AddCourse.css'
@@ -12,6 +12,9 @@ import Swal from 'sweetalert2'
 
 function AddCourse() {
     let imageUrl
+
+    const navigate = useNavigate()
+
     const [course, setCourse] = useState({
         title: '',
         description: '',
@@ -61,6 +64,10 @@ function AddCourse() {
                         icon: 'success',
                         confirmButtonText: 'Huray!',
                         confirmButtonColor: '#57D9AC',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            navigate('/courses')
+                        }
                     })
                 }
                 else {

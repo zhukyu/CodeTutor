@@ -21,8 +21,10 @@ function Learning() {
 
     const [title, setTitle] = useState('');
     const [lessons, setLessons] = useState(null);
-    const [seek, setSeek] = useState(0);
     const [current, setCurrent] = useState(0);
+    const [progress, setProgress] = useState([
+        { lesson_id: '', progress: 0 }
+    ]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,6 +37,17 @@ function Learning() {
                 document.title = res.data.title[0].title;
             })
         };
+        fetchData();
+    }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(
+                `/auth/progress`,
+            ).then(res => {
+                console.log(res.data);
+            })
+        }
         fetchData();
     }, [])
 
@@ -90,6 +103,10 @@ function Learning() {
             });
         }
     },)
+    
+    const updateProgress = () => {
+        
+    }
 
 
     return (
@@ -112,6 +129,7 @@ function Learning() {
                             {/* <video ref={raptorRef} className="plyr-react plyr" id='plyr' /> */}
                             <CustomVideoPlyr
                                 ref={playerRef}
+                                timestamp={30}
                                 type="video"
                                 source={{ type: 'video', sources: [{ src: lessons[current].URL, type: 'video/mp4' }] }}
                                 options={{
@@ -153,7 +171,7 @@ function Learning() {
                 </div>
             </div> :
                 <div>
-                    {/* <LoadingScreen
+                    <LoadingScreen
                         loading={true}
                         bgColor="rgba(0, 0, 0, 0.2)"
                         spinnerColor="#84fab0"
@@ -161,7 +179,7 @@ function Learning() {
                         logoSrc=""
                         text=""
                     >
-                    </LoadingScreen> */}
+                    </LoadingScreen>
                     <div style={{ height: "100vh" }}></div>
                 </div>
             }

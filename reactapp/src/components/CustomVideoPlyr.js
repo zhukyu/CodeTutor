@@ -8,12 +8,13 @@ const CustomVideoPlyr = forwardRef((props, ref) => {
         source,
         options,
     })
-    // useEffect (() => {
-    //     const player = document.querySelector('video')
-    //     player.addEventListener("seeking", function() {
-    //         console.log(player.currentTime);
-    //     })        
-    // })
+    useEffect (() => {
+        const player = document.querySelector('video')
+        if(player) {
+            player.currentTime = props.timestamp;
+            // player.play();
+        } 
+    })
     return <video ref={raptorRef} className="plyr-react plyr" id='plyr' {...rest} />
 })
 

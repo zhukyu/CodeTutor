@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\CourseController;
 use App\Http\Controllers\API\LessonController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\ProgressController;
 use App\Http\Controllers\API\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,9 @@ Route::group([
     Route::post('/refresh', [UsersController::class, 'refresh']);
     Route::get('/user-profile', [UsersController::class, 'userProfile']);
     Route::post('/change-pass', [UsersController::class, 'changePassWord']);
+    Route::get('/progress', [ProgressController::class, 'index']);
+    Route::post('/update-progress', [ProgressController::class, 'store']);
+    Route::post('/update-progress-multiple', [ProgressController::class, 'storeMultiple']);
 });
 
 // admin api
@@ -48,7 +52,7 @@ Route::group([
 });
 
 Route::middleware(['Author'])->group(function () {
-    Route::get('/profile', 'ProfileController@index');
+
 });
 
 Route::get('/courses', [CourseController::class, 'index']);

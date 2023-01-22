@@ -32,6 +32,6 @@ This website is designed to provide a comprehensive learning experience for anyo
 - A stable internet connection.
 
 ## Support:
-If you have any questions or run into any issues while using the website, please reach out to us at support@codetutor.com. We're always happy to help!
+If you have any questions or run into any issues while using the website, please reach out to us at phamtienhuu562002@gmail.com. We're always happy to help!
 
 Thank you for choosing **CodeTutor**. We hope you enjoy learning and growing as a developer with us!

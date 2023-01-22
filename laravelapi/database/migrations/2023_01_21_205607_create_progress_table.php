@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('lesson_id');
             $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
             $table->integer('progress');
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

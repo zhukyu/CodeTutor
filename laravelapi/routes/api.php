@@ -36,9 +36,11 @@ Route::group([
     Route::post('/refresh', [UsersController::class, 'refresh']);
     Route::get('/user-profile', [UsersController::class, 'userProfile']);
     Route::post('/change-pass', [UsersController::class, 'changePassWord']);
+    Route::get('/learning/{id}', [LessonController::class, 'learning']);
     Route::get('/progress', [ProgressController::class, 'index']);
     Route::post('/update-progress', [ProgressController::class, 'store']);
     Route::post('/update-progress-multiple', [ProgressController::class, 'storeMultiple']);
+    Route::get('/course/{id}/percentage', [CourseController::class, 'getPercentage']);
 });
 
 // admin api

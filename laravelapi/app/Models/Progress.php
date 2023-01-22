@@ -12,5 +12,6 @@ class Progress extends Model
         'user_id',
         'lesson_id',
         'progress',
+        'completed',
     ];
 }

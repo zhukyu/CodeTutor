@@ -49,14 +49,40 @@ class LessonController extends Controller
         $lessons = DB::table('lessons')
             ->where('lessons.course_id', $courseId)
             ->get();
-        $title = DB::table('course')
-            ->select('course.title')
+        $course = DB::table('course')
+            ->select('course.title', 'course.updated_at')
             ->where('course.id', $courseId)
             ->get();
         return response()->json([
             'status' => 200,
-            'title' => $title,
+            'cousre' => $course->first(),
             'data' => $lessons,
+        ]);
+    }
+
+    public function learning($courseId)
+    {
+        $lessons = DB::table('lessons')
+            ->where('lessons.course_id', $courseId)
+            ->get();
+        $course = DB::table('course')
+            ->select('course.title', 'course.updated_at')
+            ->where('course.id', $courseId)
+            ->get();
+        $progress = DB::table('progress')
+            ->select('progress.lesson_id', 'progress.progress', 'progress.completed')
+            ->where('progress.user_id', auth()->user()->id)
+            ->whereIn('progress.lesson_id', $lessons->pluck('id'))
+            ->orderBy('progress.lesson_id', 'asc')
+            ->get();
+        $temp = new CourseController();
+        $percentage = $temp->countPercentage($courseId);
+        return response()->json([
+            'status' => 200,
+            'course' => $course->first(),
+            'lessons' => $lessons,
+            'percentage' => $percentage,
+            'progress' => $progress,
         ]);
     }
 

@@ -25,12 +25,15 @@ class ProgressController extends Controller
         $progress = Progress::where('user_id', $user_id)->where('lesson_id', $input['lesson_id'])->first();
         if ($progress) {
             $progress->progress = $input['progress'];
+            if($input['completed'] == 1)
+                $progress->completed = $input['completed'];
             $progress->save();
         } else {
             $progress = Progress::create([
                 'user_id' => $user_id,
                 'lesson_id' => $input['lesson_id'],
                 'progress' => $input['progress'],
+                'completed' => $input['completed'] == 1 ? 1 : 0,
             ]);
         }
         return response()->json([
@@ -47,12 +50,15 @@ class ProgressController extends Controller
             $progress = Progress::where('user_id', $user_id)->where('lesson_id', $value['lesson_id'])->first();
             if ($progress) {
                 $progress->progress = $value['progress'];
+                if($value['completed'] == 1)
+                    $progress->completed = $value['completed'];
                 $progress->save();
             } else {
                 $progress = Progress::create([
                     'user_id' => $user_id,
                     'lesson_id' => $value['lesson_id'],
                     'progress' => $value['progress'],
+                    'completed' => $value['completed'] == 1 ? 1 : 0,
                 ]);
             }
         }
@@ -71,4 +77,6 @@ class ProgressController extends Controller
             'message' => 'Progress deleted successfully',
         ]);
     }
+
+    
 }

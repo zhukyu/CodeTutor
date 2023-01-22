@@ -1,0 +1,24 @@
+.circle-progress {
+    width: 40px;
+    height: 40px;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #e9e9e9;
+    stroke-width: 2;
+}
+
+.circle {
+    fill: none;
+    stroke: var(--main-color);
+    stroke-width: 2;
+    stroke-linecap: round;
+    transform-origin: center;
+}
+
+.percentage {
+    font-size: 10px;
+    fill: #fff;
+    text-anchor: middle;
+}

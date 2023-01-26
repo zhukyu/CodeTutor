@@ -34,6 +34,7 @@ class CourseController extends Controller
             ->get();
         $lessons = DB::table('lessons')
             ->where('course_id', $id)
+            ->whereNull('deleted_at')
             ->get();
         return response()->json([
             'status' => 200,
@@ -89,10 +90,44 @@ class CourseController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id)
+    {
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'price' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'message' => $validator->errors(),
+            ]);
+        }
+
+        $user_id = auth()->user()->id;
+
+        $course = Course::find($id);
+        $course->title = $request->title;
+        $course->user_id = $user_id;
+        $course->description = $request->description;
+        $course->image = $request->image;
+        $course->price = $request->price;
+        $course->rate = $request->rate;
+        $course->save();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Course updated successfully',
+            'course_id' => $course->id,
+        ]);
+    }
+
     public function countPercentage($course_id)
     {
         $lessons = DB::table('lessons')
             ->where('lessons.course_id', $course_id)
+            ->whereNull('lessons.deleted_at')
             ->get();
         $progress = DB::table('progress')
             ->select('progress.lesson_id', 'progress.progress', 'progress.completed')

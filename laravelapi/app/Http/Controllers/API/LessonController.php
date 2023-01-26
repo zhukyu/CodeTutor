@@ -48,6 +48,7 @@ class LessonController extends Controller
     {
         $lessons = DB::table('lessons')
             ->where('lessons.course_id', $courseId)
+            ->whereNull('lessons.deleted_at')
             ->get();
         $course = DB::table('course')
             ->select('course.title', 'course.updated_at')
@@ -64,6 +65,7 @@ class LessonController extends Controller
     {
         $lessons = DB::table('lessons')
             ->where('lessons.course_id', $courseId)
+            ->whereNull('lessons.deleted_at')
             ->get();
         $course = DB::table('course')
             ->select('course.title', 'course.updated_at')
@@ -154,6 +156,59 @@ class LessonController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Lessons created successfully',
+        ]);
+    }
+
+    public function updateMultiple(Request $request)
+    {
+        $course_id = $request->course_id;
+
+        //soft delete
+        $lessonTemp = Lesson::where('course_id', $course_id)->get();
+        foreach ($lessonTemp as $lesson) {
+            $lesson->delete();
+        }
+
+        //update
+        $temp = '';
+        $inputs = $request->all();
+        $validator = Validator::make($inputs, [
+            'course_id' => 'required',
+            'lessons' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'message' => $validator->errors(),
+            ]);
+        }
+        $lessons = $request->lessons;
+        foreach ($lessons as $lesson) {
+
+            $validator = Validator::make($lesson, [
+                'id' => 'required',
+                'name' => 'required',
+                'URL' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 400,
+                    'message' => $validator->errors(),
+                ]);
+            }
+
+            $temp = Lesson::withTrashed()->find($lesson['id']);
+            $temp->course_id = $course_id;
+            $temp->name = $lesson['name'];
+            $temp->URL = $lesson['URL'];
+            $durasi = $this->getDuration($lesson['URL']);
+            $temp->duration = date('H:i:s', strtotime('00:' . $durasi));
+            $temp->deleted_at = null;
+            $temp->save();
+        }
+        return response()->json([
+            'status' => 200,
+            'message' => 'Lessons updated successfully',
         ]);
     }
 }

@@ -13,6 +13,16 @@
     padding: 0 20px;
 }
 
+.CourseDetail .left-section .header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.CourseDetail .fa-pen-to-square {
+    color: var(--main-color);
+}
+
 .CourseDetail .right-section {
     display: flex;
     justify-content: flex-end;

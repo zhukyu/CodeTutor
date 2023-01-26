@@ -11,6 +11,7 @@ import CourseDetail from './pages/CourseDetail';
 import Learning from './pages/Learning';
 import { Provider } from 'react-redux';
 import store from './utility/store';
+import EditCourse from './pages/EditCourse';
 
 const AdminRoute = ({ element, ...rest }) => {
   if (localStorage.getItem('role') !== 'admin') {
@@ -68,6 +69,16 @@ function App() {
           }
           />
           {/* auth route */}
+          <Route path="course/:id/edit" element={
+            <AuthRoute
+              element={
+                <DefaultLayout>
+                  <EditCourse />
+                </DefaultLayout>
+              }
+            />
+          }
+          />
           <Route path="learning/:id" element={
             <AuthRoute
               element={

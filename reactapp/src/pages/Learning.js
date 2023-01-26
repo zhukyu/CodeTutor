@@ -73,10 +73,10 @@ function Learning() {
         if (index === current) return;
         if (playerRef.current) {
             if (index >= lessons.length) {
-                Swal.fire({
-                    title: 'Warning!',
-                })
-                setCurrent(lessons.length - 1);
+                // Swal.fire({
+                //     title: 'Warning!',
+                // })
+                handleLesson(null, 0);
                 return;
             }
             const element = document.querySelectorAll('.lesson')[index];
@@ -117,7 +117,7 @@ function Learning() {
                 postData(lessons[current].id, player.currentTime, 1);
                 if (progress[current].completed === 1) {
                     playerRef.current.plyr.currentTime = 0;
-                    handleLesson(null, current + 1);
+                    // handleLesson(null, current + 1);
                 }
             })
             player.addEventListener('seeked', () => {

@@ -17,6 +17,7 @@ function CourseDetail() {
     const [lessons, setLessons] = useState([
         { name: '', URL: '' }
     ])
+    const [isAuthor, setIsAuthor] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -31,7 +32,20 @@ function CourseDetail() {
         };
 
         fetchData();
-    }, [course_id])
+    }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(
+                `/author/course/${course_id}`,
+            ).then((res) => {
+                if (res.data.status === 200) {
+                    setIsAuthor(true);
+                }
+            });
+        }
+        fetchData();
+    }, [])
 
     const handleLoginPopup = (e) => {
         dispatch(toggleState());
@@ -44,7 +58,12 @@ function CourseDetail() {
             <Navbar current={1} />
             {course ? <div className='CourseDetail'>
                 <section className='left-section'>
-                    <h1 className='header'>{course.title}</h1>
+                    <div className='header-wrapper'>
+                        <h1 className='header'>{course.title}</h1>
+                        <Link to={`/course/${course.id}/edit`} className='edit-btn' style={{ display: isAuthor ? 'block' : 'none' }} title='Edit Course'>
+                            <i className="fa-solid fa-pen-to-square"></i>
+                        </Link>
+                    </div>
                     <div className='description'>{course.description}</div>
                     <h1 className='header'>Course Content</h1>
                     <div className='content'>

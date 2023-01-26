@@ -49,12 +49,17 @@ Route::group([
     'prefix' => 'admin'
 ], function ($router) {
     Route::post('/add-course', [CourseController::class, 'store']);
+    Route::post('/edit-course/{id}', [CourseController::class, 'update']);
     Route::post('/add-lesson', [LessonController::class, 'store']);
     Route::post('/add-lesson-multiple', [LessonController::class, 'storeMultiple']);
+    Route::post('/edit-lesson-multiple', [LessonController::class, 'updateMultiple']);
 });
 
-Route::middleware(['Author'])->group(function () {
-
+Route::group([
+    'middleware' => ['json.response', 'apiAuth', 'author'],
+    'prefix' => 'author'
+], function ($router) {
+    Route::get('/course/{id}', [CourseController::class, 'detail']);
 });
 
 Route::get('/courses', [CourseController::class, 'index']);

@@ -72,6 +72,7 @@ class Kernel extends HttpKernel
         'json.response' => \App\Http\Middleware\ForceJsonResponse::class,
         'apiAuth' => \App\Http\Middleware\ApiAuth::class,
         'admin' => \App\Http\Middleware\Admin::class,
+        'author' => \App\Http\Middleware\Author::class,
     ];
     public function __construct( Application $app, Router $router ) {
         parent::__construct( $app, $router );

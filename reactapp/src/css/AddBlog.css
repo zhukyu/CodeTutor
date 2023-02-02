@@ -1,0 +1,69 @@
+.AddBlog {
+    padding: 100px 0 50px 0;
+    margin: 0 auto;
+    width: 95%;
+    min-height: 100vh;
+}
+
+.AddBlog .title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.AddBlog .title {
+    font-size: 2rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.AddBlog .editor-wrapper {
+    height: 80vh;
+}
+
+.AddBlog .w-md-editor {
+    box-shadow: none;
+}
+
+.AddBlog .w-md-editor-toolbar {
+    border-bottom: none;
+}
+
+.AddBlog .w-md-editor-toolbar button {
+    height: 30px;
+    width: 30px;
+}
+
+.AddBlog .w-md-editor-toolbar svg {
+    height: 15px;
+    width: 15px;
+}
+
+.w-md-editor-toolbar li.active>button {
+    color: var(--main-color);
+    background-color: var(--color-neutral-muted);
+}
+
+.w-md-editor-toolbar li>button:hover,
+.w-md-editor-toolbar li>button:focus {
+    color: var(--main-color);
+    background-color: var(--color-neutral-muted);
+}
+
+.AddBlog .w-md-editor-text-input::selection {
+    background-color: #57d9ac6e;
+}
+
+.CodeMirror-selected {
+    color: white;
+}
+
+.AddBlog .add-blog {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+}

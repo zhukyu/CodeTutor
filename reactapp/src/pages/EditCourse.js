@@ -51,7 +51,7 @@ function EditCourse() {
                 `/author/course/${course_id}`,
             ).then((res) => {
                 if (res.data.status === 401) {
-                    navigate(`/courses/${course_id}`)
+                    navigate(`/course/${course_id}`)
                 }
                 else if (res.data.status === 200) {
                     setCourse(res.data.courses[0])
@@ -211,7 +211,7 @@ function EditCourse() {
 
     return (
         <div>
-            <Navbar current={1} back={'/courses'} />
+            <Navbar current={1} back={`/course/${course_id}`} />
             {Object.keys(course).length !== 0 ? <div className="add-course">
                 <div className="">
                     <h4 className='header'>Add Course</h4>

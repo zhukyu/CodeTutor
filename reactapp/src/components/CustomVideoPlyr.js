@@ -40,7 +40,7 @@ const CustomVideoPlyr = forwardRef((props, ref) => {
                 }
             });
             player.addEventListener('seeked', function () {
-                if (currentTime - seekStart > 600) {
+                if (currentTime - seekStart > 60) {
                     player.pause()
                     Swal.fire({
                         title: 'Warning!',

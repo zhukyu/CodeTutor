@@ -13,6 +13,8 @@ import { Provider } from 'react-redux';
 import store from './utility/store';
 import EditCourse from './pages/EditCourse';
 import AddBlog from './pages/AddBlog';
+import BlogDetail from './pages/BlogDetail';
+import EditBlog from './pages/EditBlog';
 
 const AdminRoute = ({ element, ...rest }) => {
   if (localStorage.getItem('role') !== 'admin') {
@@ -58,6 +60,12 @@ function App() {
             </DefaultLayout>
           }
           />
+          <Route path="blog/:id" element={
+            <DefaultLayout>
+              <BlogDetail />
+            </DefaultLayout>
+          }
+          />
           {/* admin route */}
           <Route path="add-course" element={
             <AdminRoute
@@ -95,6 +103,16 @@ function App() {
               element={
                 <DefaultLayout>
                   <AddBlog />
+                </DefaultLayout>
+              }
+            />
+          }
+          />
+          <Route path="blog/:id/edit" element={
+            <AuthRoute
+              element={
+                <DefaultLayout>
+                  <EditBlog />
                 </DefaultLayout>
               }
             />

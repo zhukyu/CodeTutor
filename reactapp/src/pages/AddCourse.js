@@ -11,6 +11,7 @@ import Footer from '../components/Footer'
 import Swal from 'sweetalert2'
 
 function AddCourse() {
+    document.title = 'Add Course | Code Tutor';
     let imageUrl
 
     const navigate = useNavigate()

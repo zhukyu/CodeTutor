@@ -1,0 +1,95 @@
+.BlogDetail {
+    width: 90%;
+    margin: 0 auto;
+    padding: 100px 0 50px 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.BlogDetail .controller-wrapper {
+    margin-bottom: 15px;
+}
+
+.BlogDetail .controller {
+    padding: 100px 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.BlogDetail .votes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.BlogDetail .bookmark {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 20px 0;
+}
+
+.BlogDetail .btn-vote,
+.BlogDetail .btn-bookmark {
+    cursor: pointer;
+    background: none;
+    text-decoration: none;
+    border: none;
+}
+
+.BlogDetail .btn-vote i {
+    font-size: 40px;
+    color: #9b9b9b;
+}
+
+.BlogDetail .points {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #9b9b9b;
+}
+
+.BlogDetail .btn-bookmark i {
+    font-size: 30px;
+    color: #9b9b9b;
+}
+
+.BlogDetail .blog-container {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.BlogDetail .blog-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.BlogDetail .blog-author-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.BlogDetail .blog-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.BlogDetail a {
+    text-decoration: none;
+    color: #333;
+}
+
+.BlogDetail .blog-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

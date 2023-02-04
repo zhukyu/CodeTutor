@@ -12,6 +12,7 @@ import Footer from '../components/Footer'
 import Swal from 'sweetalert2'
 
 function EditCourse() {
+    document.title = 'Edit Course | Code Tutor';
     const params = useParams();
     const course_id = params.id;
     let imageUrl
@@ -58,6 +59,13 @@ function EditCourse() {
                     setCourseDemo(res.data.courses[0])
                     setLessons(res.data.lessons)
                 }
+                else {
+                    navigate(`/course/${course_id}`)
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                navigate(`/course/${course_id}`)
             });
         }
         fetchData();

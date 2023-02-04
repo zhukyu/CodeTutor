@@ -63,7 +63,7 @@ let items = [
 ]
 
 function Home() {
-
+    document.title = 'Code Tutor';
     const [courses, setCourses] = useState(null);
     // minimize navbar
     useEffect(() => {
@@ -133,7 +133,7 @@ function Home() {
                 {courses ? <div className="wrap-home">
                     <div className="course-section" id="course-section">
                         <div className="wrap-header">
-                            <span className="header">Features Courses</span>
+                            <span className="header">Featured Courses</span>
                             <Link to="/courses" className="all-courses">
                                 <span>All Courses</span>
                                 <i className="fa-solid fa-greater-than"></i>
@@ -158,7 +158,7 @@ function Home() {
                         </div>
                         <div className="course-section">
                             <div className="wrap-header">
-                                <span className="header">Features Blogs</span>
+                                <span className="header">Featured Blogs</span>
                                 <Link to="#" className="all-courses">
                                     <span>All Blogs</span>
                                     <i className="fa-solid fa-greater-than"></i>

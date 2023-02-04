@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleState } from '../utility/actions';
 
 function CourseDetail() {
+    document.title = 'Course Detail | Code Tutor';
     const params = useParams();
     const course_id = params.id;
 

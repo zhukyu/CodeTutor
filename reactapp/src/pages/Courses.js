@@ -9,6 +9,7 @@ import LoadingScreen from "react-loading-screen"
 import Footer from '../components/Footer';
 
 function Courses() {
+    document.title = 'Courses | Code Tutor';
     const [courses, setCourses] = useState(null);
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -31,7 +32,7 @@ function Courses() {
             {courses ? <div className='Courses'>
                 <div className="course-section" id="course-section">
                     <div className="wrap-header">
-                        <span className="header">Features Courses</span>
+                        <span className="header">Featured Courses</span>
                         {localStorage.getItem('role') === 'admin' ? <Link to={'/add-course'} className="">
                             <Button className="" onClick=''>Add Course</Button>
                         </Link> : ''}

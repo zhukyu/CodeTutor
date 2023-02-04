@@ -43,3 +43,7 @@
 .App.disabled {
   pointer-events: none;
 }
+
+a {
+  color: var(--main-color)
+}

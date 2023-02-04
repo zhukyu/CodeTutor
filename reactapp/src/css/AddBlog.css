@@ -10,6 +10,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    gap: 10px;
 }
 
 .AddBlog .title {
@@ -66,4 +67,15 @@
     justify-content: flex-end;
     align-items: center;
     margin-top: 20px;
+}
+
+.wmde-markdown h1,
+.wmde-markdown h2,
+.wmde-markdown h3,
+.wmde-markdown h4 {
+    border-bottom: none;
+}
+
+.wmde-markdown a {
+    color: var(--main-color);
 }

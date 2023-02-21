@@ -186,7 +186,6 @@ class LessonController extends Controller
         foreach ($lessons as $lesson) {
 
             $validator = Validator::make($lesson, [
-                'id' => 'required',
                 'name' => 'required',
                 'URL' => 'required',
             ]);
@@ -196,15 +195,24 @@ class LessonController extends Controller
                     'message' => $validator->errors(),
                 ]);
             }
-
-            $temp = Lesson::withTrashed()->find($lesson['id']);
-            $temp->course_id = $course_id;
-            $temp->name = $lesson['name'];
-            $temp->URL = $lesson['URL'];
-            $durasi = $this->getDuration($lesson['URL']);
-            $temp->duration = date('H:i:s', strtotime('00:' . $durasi));
-            $temp->deleted_at = null;
-            $temp->save();
+            if (!isset($lesson['id'])) {
+                $temp = new Lesson();
+                $temp->course_id = $course_id;
+                $temp->name = $lesson['name'];
+                $temp->URL = $lesson['URL'];
+                $durasi = $this->getDuration($lesson['URL']);
+                $temp->duration = date('H:i:s', strtotime('00:' . $durasi));
+                $temp->save();
+            } else {
+                $temp = Lesson::withTrashed()->find($lesson['id']);
+                $temp->course_id = $course_id;
+                $temp->name = $lesson['name'];
+                $temp->URL = $lesson['URL'];
+                $durasi = $this->getDuration($lesson['URL']);
+                $temp->duration = date('H:i:s', strtotime('00:' . $durasi));
+                $temp->deleted_at = null;
+                $temp->save();
+            }
         }
         return response()->json([
             'status' => 200,

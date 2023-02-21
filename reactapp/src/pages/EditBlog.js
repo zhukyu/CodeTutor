@@ -20,7 +20,7 @@ function EditBlog() {
                 `auth/blog/${blog_id}`,
             ).then((res) => {
                 console.log(res.data);
-                if(res.data.status === 200) {
+                if (res.data.status === 200) {
                     setTitle(res.data.blog.title);
                     setContent(res.data.blog.content);
                 }
@@ -41,7 +41,7 @@ function EditBlog() {
     const [updated, setUpdated] = useState(false);
 
     const navigate = useNavigate();
-    
+
     const handleUpdate = async () => {
         setUpdated(false)
         const data = new FormData();
@@ -54,7 +54,7 @@ function EditBlog() {
                     setUpdated(true)
                     console.log(res.data);
                 }
-                else if(res.data.status === 404) {
+                else if (res.data.status === 404) {
                     navigate('/blogs');
                     console.log(res.data);
                 }
@@ -66,7 +66,7 @@ function EditBlog() {
 
     const handlePublish = async (e) => {
         e.preventDefault();
-    
+
         const res = await axios.put(`/auth/publish-blog/${blog_id}`)
             .then((res) => {
                 if (res.data.status === 200) {

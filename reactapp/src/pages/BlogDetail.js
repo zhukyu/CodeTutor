@@ -79,7 +79,6 @@ function BlogDetail() {
 
     useEffect(() => {
         const handleScroll = () => {
-            console.log(window.scrollY);
             if (window.scrollY > 100) {
                 setSticky(true);
             }

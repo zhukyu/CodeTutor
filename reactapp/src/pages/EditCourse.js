@@ -83,17 +83,17 @@ function EditCourse() {
             .then((res) => {
                 if (res.data.status === 200) {
                     console.log(res.data);
-                    // Swal.fire({
-                    //     title: 'Success!',
-                    //     text: 'Course edited successfully',
-                    //     icon: 'success',
-                    //     confirmButtonText: 'Huray!',
-                    //     confirmButtonColor: '#57D9AC',
-                    // }).then((result) => {
-                    //     if (result.isConfirmed) {
-                    //         navigate('/courses')
-                    //     }
-                    // })
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Course edited successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Huray!',
+                        confirmButtonColor: '#57D9AC',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            navigate('/courses')
+                        }
+                    })
                 }
                 else {
                     console.log(res.data);
